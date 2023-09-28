@@ -1,23 +1,12 @@
-import Avatar from './Avatar.js';
+import {people} from './data.js';
 
-function Card({ children }) {
-  return (
-    <div className="card">
-      {children}
-    </div>
-  );
-}
-
-export default function Profile() {
-  return (
-    <Card>
-      <Avatar
-        size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi',
-          imageId: 'YfeOqp2'
-        }}
-      />
-    </Card>
-  );
+export default function List() {
+    const listItems = people.map((person) =>
+        <li key={person.id}>
+            <p>
+                <b>{person.name}</b> is a {person.profession}
+            </p>
+        </li>
+    );
+    return <ul>{listItems}</ul>
 }
