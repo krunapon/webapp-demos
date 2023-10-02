@@ -1,14 +1,16 @@
-import { recipes } from './data-q2.js';
-
+import { recipes } from "./data-q2.js";
 
 export default function RecipeList() {
   return (
     <div>
       <h1>Recipes</h1>
-      {recipes.map(recipe => <h2>{recipe.name}</h2>)}
-      <ul>
-
-      </ul>
+      {recipes.map((recipe) => {
+          <ul>
+            {recipe.ingredients.map((ingredient) => (
+              <li>{ingredient}</li>
+            ))}
+          </ul>
+      })}
     </div>
   );
 }
