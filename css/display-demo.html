@@ -5,193 +5,297 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CSS Display Property - Interactive Demo</title>
     <style>
+      /* =====================================================
+         BASE STYLES AND LAYOUT FOUNDATION
+         ===================================================== */
+      
+      /* Basic body styling that creates a clean, readable foundation
+         for our demonstration. The light background helps distinguish
+         each section while maintaining good contrast. */
       body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;  /* Clean, readable font for educational content */
+        margin: 20px;                    /* Provides breathing room around the entire demo */
+        background-color: #f5f5f5;       /* Light gray background reduces eye strain */
       }
 
+      /* Section containers that organize each demonstration topic
+         These create visual separation between different display concepts
+         and provide consistent spacing throughout the demo. */
       .section {
-        background: white;
-        margin: 20px 0;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background: white;                           /* White background makes each section distinct */
+        margin: 20px 0;                             /* Vertical spacing between sections */
+        padding: 15px;                              /* Internal spacing for comfortable reading */
+        border-radius: 8px;                         /* Rounded corners for modern appearance */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   /* Subtle shadow adds depth and separation */
       }
 
+      /* Section headings with visual emphasis
+         The border-bottom creates a clear hierarchy and helps students
+         identify the main concept being demonstrated in each section. */
       .section h2 {
-        color: #333;
-        border-bottom: 2px solid #007bff;
-        padding-bottom: 5px;
+        color: #333;                        /* Dark gray for good readability */
+        border-bottom: 2px solid #007bff;   /* Blue underline emphasizes section importance */
+        padding-bottom: 5px;                /* Space between text and border */
       }
 
+      /* General demo container styling
+         This provides a consistent background for all demonstration areas,
+         making it clear where the interactive examples are located. */
       .demo-box {
-        background: #e9ecef;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 4px;
+        background: #e9ecef;        /* Light gray background distinguishes demo areas */
+        padding: 10px;              /* Comfortable padding around demo content */
+        margin: 10px 0;             /* Vertical spacing between demo boxes */
+        border-radius: 4px;         /* Slightly rounded corners for consistency */
       }
 
-      /* 1. None vs Hidden */
-        .none { display: none; }
-        .hidden { visibility: hidden; }
-        .visible {
-            background: #dc3545;
-            color: white;
-            padding: 10px;
-            margin: 5px 0;
-            text-align: center;
-        }
-        
-        .visibility-demo {
-            background: #f8f9fa;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border: 2px dashed #6c757d;
-        }
+      /* =====================================================
+         DISPLAY: NONE vs VISIBILITY: HIDDEN DEMONSTRATION
+         ===================================================== */
+      
+      /* These styles demonstrate the critical difference between
+         display: none (removes element from document flow) and
+         visibility: hidden (hides element but preserves space) */
+      
+      .none { 
+        display: none;              /* Completely removes element from layout flow */
+      }
+      
+      .hidden { 
+        visibility: hidden;         /* Hides element but maintains its space in layout */
+      }
+      
+      /* Base styling for visible elements in the visibility demo
+         The red background and white text create high contrast
+         to clearly show when elements are present or absent. */
+      .visible {
+        background: #dc3545;        /* Red background for high visibility */
+        color: white;               /* White text for contrast */
+        padding: 10px;              /* Padding makes elements substantial enough to see effect */
+        margin: 5px 0;              /* Vertical spacing between elements */
+        text-align: center;         /* Centers text for clean appearance */
+      }
+      
+      /* Container for the visibility demonstration
+         The dashed border helps students understand the container boundaries
+         and see how space is preserved or removed with different methods. */
+      .visibility-demo {
+        background: #f8f9fa;        /* Light background distinguishes demo area */
+        padding: 10px;              /* Padding around demo content */
+        margin: 10px 0;             /* Vertical spacing */
+        border-radius: 4px;         /* Rounded corners for consistency */
+        border: 2px dashed #6c757d; /* Dashed border shows container boundaries */
+      }
 
-      /* 2. Flexbox */
-        .flex-container {
-            display: flex;
-            background: #e9ecef;
-            padding: 10px;
-            margin: 10px 0;
-            gap: 10px;
-        }
-        
-        .flex-item {
-            background: #6f42c1;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 4px;
-            min-width: 50px;
-        }
-        
-        .flex-grow { flex: 1; }
-        .flex-fixed { flex: 0 0 100px; }
-        .flex-grow-2 { flex: 2; }
-        .flex-shrink { flex: 0 1 200px; }
-        .flex-basis { flex: 0 0 150px; }
-        .flex-shrink-high { flex: 0 2 200px; }
-        
-        .flex-demo {
-            background: #f8f9fa;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border: 2px dashed #6c757d;
-        }
-        
-        .flex-demo-container {
-            display: flex;
-            background: #e9ecef;
-            padding: 10px;
-            gap: 10px;
-            border-radius: 4px;
-            width: 100%;
-        }
-        
-        .flex-demo-item {
-            background: #6f42c1;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 4px;
-            min-width: 60px;
-        }
-        
+      /* =====================================================
+         FLEXBOX DEMONSTRATION STYLES
+         ===================================================== */
+      
+      /* Main flexbox container styling
+         This creates the flexible layout context where flex items
+         can demonstrate grow, shrink, and basis properties. */
+      .flex-container {
+        display: flex;              /* Establishes flex formatting context */
+        background: #e9ecef;        /* Light background shows container boundaries */
+        padding: 10px;              /* Padding around flex items */
+        margin: 10px 0;             /* Vertical spacing */
+        gap: 10px;                  /* Modern way to add space between flex items */
+      }
+      
+      /* Base flex item styling
+         These styles create visually distinct items that clearly demonstrate
+         how flex properties affect sizing and distribution. */
+      .flex-item {
+        background: #6f42c1;        /* Purple background for visibility */
+        color: white;               /* White text for contrast */
+        padding: 15px;              /* Generous padding makes items substantial */
+        text-align: center;         /* Centers text within items */
+        border-radius: 4px;         /* Rounded corners for modern appearance */
+        min-width: 50px;            /* Minimum width prevents items from becoming too small */
+      }
+      
+      /* Specific flex property demonstrations
+         Each class shows different flex behaviors that students can observe */
+      .flex-grow { flex: 1; }              /* Grows to fill available space */
+      .flex-fixed { flex: 0 0 100px; }     /* Fixed width, doesn't grow or shrink */
+      .flex-grow-2 { flex: 2; }            /* Grows twice as much as flex: 1 items */
+      .flex-shrink { flex: 0 1 200px; }    /* Can shrink from 200px basis */
+      .flex-basis { flex: 0 0 150px; }     /* Fixed 150px width */
+      .flex-shrink-high { flex: 0 2 200px; } /* Shrinks twice as much as normal */
+      
+      /* Interactive flex demonstration container
+         This provides a controlled environment for students to see
+         flex properties change in real-time. */
+      .flex-demo {
+        background: #f8f9fa;        /* Light background distinguishes demo area */
+        padding: 10px;              /* Padding around demo content */
+        margin: 10px 0;             /* Vertical spacing */
+        border-radius: 4px;         /* Rounded corners */
+        border: 2px dashed #6c757d; /* Dashed border shows container boundaries */
+      }
+      
+      /* Container for the interactive flex demonstration
+         This nested container allows for better control over the flex
+         layout while maintaining visual separation. */
+      .flex-demo-container {
+        display: flex;              /* Creates flex context for demonstration */
+        background: #e9ecef;        /* Light background shows container */
+        padding: 10px;              /* Padding around flex items */
+        gap: 10px;                  /* Space between items */
+        border-radius: 4px;         /* Rounded corners */
+        width: 100%;                /* Full width by default (changes for shrink demo) */
+      }
+      
+      /* Interactive flex demo items
+         These items change their flex properties based on user interaction,
+         allowing students to see the effects in real-time. */
+      .flex-demo-item {
+        background: #6f42c1;        /* Purple background for visibility */
+        color: white;               /* White text for contrast */
+        padding: 10px;              /* Padding for comfortable text */
+        text-align: center;         /* Centers text within items */
+        border-radius: 4px;         /* Rounded corners */
+        min-width: 60px;            /* Minimum width prevents items from becoming too small */
+      }
 
-
-      /* 6. Grid */
+      /* =====================================================
+         CSS GRID DEMONSTRATION STYLES
+         ===================================================== */
+      
+      /* Grid container that demonstrates two-dimensional layout
+         Unlike flexbox (which is one-dimensional), grid allows
+         control over both rows and columns simultaneously. */
       .grid-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        background: #e9ecef;
-        padding: 10px;
-        margin: 10px 0;
+        display: grid;                      /* Establishes grid formatting context */
+        grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+        gap: 10px;                          /* Space between grid items */
+        background: #e9ecef;                /* Light background shows container */
+        padding: 10px;                      /* Padding around grid items */
+        margin: 10px 0;                     /* Vertical spacing */
       }
 
+      /* Grid items that populate the grid container
+         The orange color helps distinguish grid items from flex items,
+         making it easier for students to understand the different systems. */
       .grid-item {
-        background: #fd7e14;
-        color: white;
-        padding: 20px;
-        text-align: center;
-        border-radius: 4px;
+        background: #fd7e14;        /* Orange background distinguishes from flex items */
+        color: white;               /* White text for contrast */
+        padding: 20px;              /* Generous padding makes items substantial */
+        text-align: center;         /* Centers text within items */
+        border-radius: 4px;         /* Rounded corners for consistency */
       }
 
-      /* 7. Table Display */
+      /* =====================================================
+         TABLE DISPLAY DEMONSTRATION STYLES
+         ===================================================== */
+      
+      /* Table display properties allow creating table-like layouts
+         without using actual table HTML elements. This is useful
+         for certain layout requirements while maintaining semantic HTML. */
       .table {
-        display: table;
-        width: 100%;
-        margin: 10px 0;
+        display: table;             /* Creates table formatting context */
+        width: 100%;                /* Full width of container */
+        margin: 10px 0;             /* Vertical spacing */
       }
+      
       .table-row {
-        display: table-row;
+        display: table-row;         /* Creates table row behavior */
       }
+      
       .table-cell {
-        display: table-cell;
-        background: #20c997;
-        color: white;
-        padding: 10px;
-        border: 2px solid white;
-        text-align: center;
+        display: table-cell;        /* Creates table cell behavior */
+        background: #20c997;        /* Teal background for visibility */
+        color: white;               /* White text for contrast */
+        padding: 10px;              /* Padding within cells */
+        border: 2px solid white;    /* White border separates cells */
+        text-align: center;         /* Centers text within cells */
       }
 
-      /* Interactive Toggle */
+      /* =====================================================
+         INTERACTIVE DEMONSTRATION STYLES
+         ===================================================== */
+      
+      /* Container for interactive toggle demonstrations
+         The dashed border helps students understand the boundaries
+         of the demonstration area and see how display changes affect layout. */
       .toggle-demo {
-        background: #f8f9fa;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 4px;
-        border: 2px dashed #6c757d;
+        background: #f8f9fa;        /* Light background distinguishes demo area */
+        padding: 10px;              /* Padding around demo content */
+        margin: 10px 0;             /* Vertical spacing */
+        border-radius: 4px;         /* Rounded corners */
+        border: 2px dashed #6c757d; /* Dashed border shows container boundaries */
       }
 
+      /* Items that change their display properties interactively
+         These demonstrate how the same HTML elements behave differently
+         with different display values. */
       .toggle-item {
-        background: #007bff;
-        color: white;
-        padding: 10px;
-        margin: 5px;
-        text-align: center;
-        border-radius: 4px;
+        background: #007bff;        /* Blue background for visibility */
+        color: white;               /* White text for contrast */
+        padding: 10px;              /* Padding for comfortable text */
+        margin: 5px;                /* Margin provides space between items */
+        text-align: center;         /* Centers text within items */
+        border-radius: 4px;         /* Rounded corners for modern appearance */
       }
 
+      /* =====================================================
+         INTERACTIVE BUTTON STYLES
+         ===================================================== */
+      
+      /* Button styling for interactive controls
+         These buttons allow students to experiment with different
+         display properties and see the effects immediately. */
       button {
-        background: #007bff;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        margin: 3px;
-        border-radius: 4px;
-        cursor: pointer;
+        background: #007bff;        /* Blue background for primary actions */
+        color: white;               /* White text for contrast */
+        border: none;               /* Removes default button border */
+        padding: 8px 16px;          /* Comfortable padding for clicking */
+        margin: 3px;                /* Small margin between buttons */
+        border-radius: 4px;         /* Rounded corners for modern appearance */
+        cursor: pointer;            /* Shows pointer cursor on hover */
       }
 
+      /* Button hover state for better user experience
+         Provides visual feedback when users hover over buttons. */
       button:hover {
-        background: #0056b3;
+        background: #0056b3;        /* Darker blue on hover */
       }
+      
+      /* Active button state to show current selection
+         Green background clearly indicates which display property is active. */
       button.active {
-        background: #28a745;
+        background: #28a745;        /* Green background for active state */
       }
 
+      /* =====================================================
+         CODE SNIPPET STYLING
+         ===================================================== */
+      
+      /* Inline code styling for CSS property names
+         This helps students identify CSS properties and values
+         within the explanatory text. */
       code {
-        background: #f8f9fa;
-        padding: 2px 4px;
-        border-radius: 3px;
-        font-family: monospace;
-        color: #e83e8c;
+        background: #f8f9fa;        /* Light background distinguishes code */
+        padding: 2px 4px;           /* Small padding around code text */
+        border-radius: 3px;         /* Slightly rounded corners */
+        font-family: monospace;     /* Monospace font for code readability */
+        color: #e83e8c;             /* Pink color makes code stand out */
       }
     </style>
   </head>
   <body>
     <h1>CSS Display Property - Essential Concepts</h1>
-    <!-- 1. Interactive Demo -->
+    
+    <!-- ===============================================
+         INTERACTIVE DISPLAY PROPERTY DEMONSTRATION
+         =============================================== -->
     <div class="section">
       <h2>1. Interactive Demo</h2>
       <p>
         Click buttons to see how display properties affect the same elements:
       </p>
+      <!-- Control buttons that allow students to switch between display types
+           Each button triggers a JavaScript function that changes the display
+           property of the demo items, allowing real-time observation of changes. -->
       <div>
         <button onclick="setDisplay('block')" class="active">Block</button>
         <button onclick="setDisplay('inline')">Inline</button>
@@ -199,9 +303,16 @@
         <button onclick="setDisplay('flex')">Flex</button>
         <button onclick="setDisplay('none')">None</button>
       </div>
-      <div class ="property-description">
-        <p>
-        </p>
+      
+      <!-- Description area that updates to show current display type
+           This provides immediate feedback about what display property is active. -->
+      <div class="property-description">
+        <p></p>
+      </div>
+      
+      <!-- Demo container with items that change display properties
+           These three items demonstrate how the same HTML elements
+           behave differently with different display values. -->
       <div class="toggle-demo" id="demo-container">
         <div class="toggle-item">Item 1</div>
         <div class="toggle-item">Item 2</div>
@@ -209,45 +320,72 @@
       </div>
     </div>
 
-    <!-- 2. None vs Hidden -->
+    <!-- ===============================================
+         DISPLAY: NONE vs VISIBILITY: HIDDEN COMPARISON
+         =============================================== -->
     <div class="section">
-        <h2>2. None vs Hidden</h2>
-        <p><code>display: none</code> removes element, <code>visibility: hidden</code> keeps space</p>
-        <div>
-            <button onclick="toggleVisibility('none')">Toggle Display None</button>
-            <button onclick="toggleVisibility('hidden')">Toggle Visibility Hidden</button>
-            <button onclick="toggleVisibility('reset')">Show All</button>
-        </div>
-        <div class="visibility-demo" id="visibility-container">
-            <div class="visible">Visible Before</div>
-            <div class="visible" id="none-element">Display None Target</div>
-            <div class="visible" id="hidden-element">Visibility Hidden Target</div>
-            <div class="visible">Visible After</div>
-        </div>
+      <h2>2. None vs Hidden</h2>
+      <p><code>display: none</code> removes element, <code>visibility: hidden</code> keeps space</p>
+      
+      <!-- Control buttons for visibility demonstration
+           These buttons allow students to see the difference between
+           removing an element from the layout vs just hiding it. -->
+      <div>
+        <button onclick="toggleVisibility('none')">Toggle Display None</button>
+        <button onclick="toggleVisibility('hidden')">Toggle Visibility Hidden</button>
+        <button onclick="toggleVisibility('reset')">Show All</button>
+      </div>
+      
+      <!-- Demonstration area showing the difference between none and hidden
+           The "before" and "after" elements help students see how space
+           is handled differently with each hiding method. -->
+      <div class="visibility-demo" id="visibility-container">
+        <div class="visible">Visible Before</div>
+        <div class="visible" id="none-element">Display None Target</div>
+        <div class="visible" id="hidden-element">Visibility Hidden Target</div>
+        <div class="visible">Visible After</div>
+      </div>
     </div>
 
-    <!-- 3. Flexbox -->
+    <!-- ===============================================
+         INTERACTIVE FLEXBOX DEMONSTRATION
+         =============================================== -->
     <h2>3. Interactive Flex Demo:</h2>
-            <div>
-                <button onclick="setFlexProperty('grow')">Show Flex-Grow</button>
-                <button onclick="setFlexProperty('shrink')">Show Flex-Shrink</button>
-                <button onclick="setFlexProperty('basis')">Show Flex-Basis</button>
-                <button onclick="setFlexProperty('combined')">Show Combined</button>
-            </div>
-            <div class="flex-demo" id="flex-container">
-                <div class="flex-demo-container" id="flex-demo-container">
-                    <div class="flex-demo-item" id="flex-item-1">Item 1</div>
-                    <div class="flex-demo-item" id="flex-item-2">Item 2</div>
-                    <div class="flex-demo-item" id="flex-item-3">Item 3</div>
-                </div>
-                <div id="flex-info" style="margin-top: 10px; font-size: 14px; color: #666;"></div>
-            </div>
+    <!-- Control buttons for flexbox property demonstration
+         Each button shows different flex properties in action,
+         helping students understand grow, shrink, and basis concepts. -->
+    <div>
+      <button onclick="setFlexProperty('grow')">Show Flex-Grow</button>
+      <button onclick="setFlexProperty('shrink')">Show Flex-Shrink</button>
+      <button onclick="setFlexProperty('basis')">Show Flex-Basis</button>
+      <button onclick="setFlexProperty('combined')">Show Combined</button>
+    </div>
+    
+    <!-- Flexbox demonstration container
+         This area changes its flex properties based on user interaction,
+         with detailed explanations of what's happening. -->
+    <div class="flex-demo" id="flex-container">
+      <div class="flex-demo-container" id="flex-demo-container">
+        <div class="flex-demo-item" id="flex-item-1">Item 1</div>
+        <div class="flex-demo-item" id="flex-item-2">Item 2</div>
+        <div class="flex-demo-item" id="flex-item-3">Item 3</div>
+      </div>
+      <!-- Information area that explains current flex behavior
+           This text updates to explain exactly what flex properties
+           are being demonstrated and how they affect the layout. -->
+      <div id="flex-info" style="margin-top: 10px; font-size: 14px; color: #666;"></div>
+    </div>
 
-    <!-- 4. Grid -->
+    <!-- ===============================================
+         CSS GRID DEMONSTRATION
+         =============================================== -->
     <div class="section">
       <h2>4. Grid</h2>
       <p><code>display: grid</code> - Two-dimensional layout system</p>
       <div class="demo-box">
+        <!-- Grid container with items that automatically arrange in columns
+             This demonstrates how grid creates two-dimensional layouts
+             with automatic item placement. -->
         <div class="grid-container">
           <div class="grid-item">1</div>
           <div class="grid-item">2</div>
@@ -257,7 +395,9 @@
       </div>
     </div>
 
-    <!-- 5. Table Display -->
+    <!-- ===============================================
+         TABLE DISPLAY DEMONSTRATION
+         =============================================== -->
     <div class="section">
       <h2>5. Table Display</h2>
       <p>
@@ -265,6 +405,9 @@
         table markup
       </p>
       <div class="demo-box">
+        <!-- Table display demonstration using div elements
+             This shows how table display properties can create
+             table-like layouts without using table HTML elements. -->
         <div class="table">
           <div class="table-row">
             <div class="table-cell">Cell 1</div>
@@ -272,126 +415,169 @@
           </div>
           <div class="table-row">
             <div class="table-cell">Cell 3</div>
-            <div class="table-cell">Cell 4</div
+            <div class="table-cell">Cell 4</div>
           </div>
         </div>
       </div>
     </div>
 
-    
-
     <script>
-        function toggleVisibility(action) {
-            const noneElement = document.getElementById('none-element');
-            const hiddenElement = document.getElementById('hidden-element');
-            
-            if (action === 'none') {
-                noneElement.style.display = noneElement.style.display === 'none' ? 'block' : 'none';
-            } else if (action === 'hidden') {
-                hiddenElement.style.visibility = hiddenElement.style.visibility === 'hidden' ? 'visible' : 'hidden';
-            } else if (action === 'reset') {
-                noneElement.style.display = 'block';
-                hiddenElement.style.visibility = 'visible';
-            }
-        }
+      /* =====================================================
+         JAVASCRIPT FUNCTIONS FOR INTERACTIVE DEMONSTRATIONS
+         ===================================================== */
+
+      /**
+       * Toggles visibility demonstration between display:none and visibility:hidden
+       * This function helps students understand the key difference between these
+       * two methods of hiding elements.
+       * 
+       * @param {string} action - 'none', 'hidden', or 'reset'
+       */
+      function toggleVisibility(action) {
+        // Get references to the target elements
+        const noneElement = document.getElementById('none-element');
+        const hiddenElement = document.getElementById('hidden-element');
         
+        if (action === 'none') {
+          // Toggle display: none - element is completely removed from layout
+          noneElement.style.display = noneElement.style.display === 'none' ? 'block' : 'none';
+        } else if (action === 'hidden') {
+          // Toggle visibility: hidden - element is hidden but space is preserved
+          hiddenElement.style.visibility = hiddenElement.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        } else if (action === 'reset') {
+          // Reset both elements to visible state
+          noneElement.style.display = 'block';
+          hiddenElement.style.visibility = 'visible';
+        }
+      }
+
+      /**
+       * Sets the display property for the main interactive demonstration
+       * This function allows students to see how the same elements behave
+       * with different display values applied.
+       * 
+       * @param {string} type - The display value to apply ('block', 'inline', etc.)
+       */
       function setDisplay(type) {
         const container = document.getElementById("demo-container");
         const items = container.querySelectorAll(".toggle-item");
 
-        // Update button states
+        // Update button states to show which display type is active
+        // This provides visual feedback about the current selection
         document
           .querySelectorAll("button")
           .forEach((btn) => btn.classList.remove("active"));
         event.target.classList.add("active");
 
-        // Reset container
+        // Reset container to default state before applying new display type
         container.style.display = "block";
 
-        // Apply display type
+        // Apply the selected display type to all demo items
         items.forEach((item) => {
           item.style.display = type;
-          item.style.width = "auto";
-          item.style.height = "auto";
+          item.style.width = "auto";    // Reset any previous width changes
+          item.style.height = "auto";   // Reset any previous height changes
         });
 
-        // Special handling for different types
+        // Special handling for display types that need container modifications
         if (type === "flex") {
+          // For flex display, the container needs to be flex, not the items
           container.style.display = "flex";
           container.style.gap = "10px";
         } else if (type === "inline-block") {
+          // For inline-block demo, set specific dimensions to show the effect
           items.forEach((item) => {
             item.style.width = "100px";
             item.style.height = "50px";
           });
         }
 
+        // Update the description to show current display type
         const result = document.querySelector(".property-description p");
         result.textContent = `Display type set to: ${type}`;
-    }
-     function setFlexProperty(type) {
-            const container = document.getElementById('flex-demo-container');
-            const item1 = document.getElementById('flex-item-1');
-            const item2 = document.getElementById('flex-item-2');
-            const item3 = document.getElementById('flex-item-3');
-            const info = document.getElementById('flex-info');
-            
-            // Reset all items
-            [item1, item2, item3].forEach(item => {
-                item.style.flex = '';
-                item.style.backgroundColor = '#6f42c1';
-            });
-            
-            // Set container width for shrink demo
-            container.style.width = type === 'shrink' ? '300px' : '100%';
-            
-            switch(type) {
-                case 'grow':
-                    item1.style.flex = '1';
-                    item2.style.flex = '2';
-                    item3.style.flex = '1';
-                    item1.style.backgroundColor = '#28a745';
-                    item2.style.backgroundColor = '#dc3545';
-                    item3.style.backgroundColor = '#28a745';
-                    info.innerHTML = '<strong>Flex-Grow:</strong> Item 1 (flex: 1), Item 2 (flex: 2), Item 3 (flex: 1)<br>Item 2 grows twice as much as Items 1 and 3';
-                    break;
-                    
-                case 'shrink':
-                    item1.style.flex = '0 1 150px';
-                    item2.style.flex = '0 2 150px';
-                    item3.style.flex = '0 0 150px';
-                    item1.style.backgroundColor = '#ffc107';
-                    item2.style.backgroundColor = '#dc3545';
-                    item3.style.backgroundColor = '#17a2b8';
-                    info.innerHTML = '<strong>Flex-Shrink:</strong> Item 1 (shrink: 1), Item 2 (shrink: 2), Item 3 (shrink: 0)<br>Container width: 300px, each item basis: 150px. Item 2 shrinks twice as much as Item 1. Item 3 doesn\'t shrink.';
-                    break;
-                    
-                case 'basis':
-                    item1.style.flex = '0 0 100px';
-                    item2.style.flex = '0 0 200px';
-                    item3.style.flex = '0 0 150px';
-                    item1.style.backgroundColor = '#fd7e14';
-                    item2.style.backgroundColor = '#6f42c1';
-                    item3.style.backgroundColor = '#20c997';
-                    info.innerHTML = '<strong>Flex-Basis:</strong> Item 1 (100px), Item 2 (200px), Item 3 (150px)<br>Items have fixed widths based on their flex-basis values';
-                    break;
-                    
-                case 'combined':
-                    item1.style.flex = '1 1 100px';
-                    item2.style.flex = '2 2 50px';
-                    item3.style.flex = '1 0 200px';
-                    item1.style.backgroundColor = '#e83e8c';
-                    item2.style.backgroundColor = '#6610f2';
-                    item3.style.backgroundColor = '#fd7e14';
-                    info.innerHTML = '<strong>Combined:</strong> Item 1 (1 1 100px), Item 2 (2 2 50px), Item 3 (1 0 200px)<br>Shows grow, shrink, and basis working together';
-                    break;
-            }
-        }
+      }
+
+      /**
+       * Demonstrates different flexbox properties in action
+       * This function changes flex properties on demo items to show
+       * how grow, shrink, and basis work individually and together.
+       * 
+       * @param {string} type - The flex property to demonstrate
+       */
+      function setFlexProperty(type) {
+        const container = document.getElementById('flex-demo-container');
+        const item1 = document.getElementById('flex-item-1');
+        const item2 = document.getElementById('flex-item-2');
+        const item3 = document.getElementById('flex-item-3');
+        const info = document.getElementById('flex-info');
         
-        // Initialize flex demo
-        document.addEventListener('DOMContentLoaded', function() {
-            setFlexProperty('grow');
+        // Reset all items to default state before applying new properties
+        [item1, item2, item3].forEach(item => {
+          item.style.flex = '';
+          item.style.backgroundColor = '#6f42c1';
         });
+        
+        // Set container width based on demonstration type
+        // Shrink demo needs constrained width to show shrinking behavior
+        container.style.width = type === 'shrink' ? '300px' : '100%';
+        
+        // Apply different flex properties based on selected demonstration
+        switch(type) {
+          case 'grow':
+            // Demonstrate flex-grow: how items expand to fill available space
+            item1.style.flex = '1';
+            item2.style.flex = '2';    // This item grows twice as much
+            item3.style.flex = '1';
+            // Use different colors to clearly show the growth differences
+            item1.style.backgroundColor = '#28a745';
+            item2.style.backgroundColor = '#dc3545';
+            item3.style.backgroundColor = '#28a745';
+            info.innerHTML = '<strong>Flex-Grow:</strong> Item 1 (flex: 1), Item 2 (flex: 2), Item 3 (flex: 1)<br>Item 2 grows twice as much as Items 1 and 3';
+            break;
+            
+          case 'shrink':
+            // Demonstrate flex-shrink: how items contract when space is limited
+            item1.style.flex = '0 1 150px';    // Can shrink normally
+            item2.style.flex = '0 2 150px';    // Shrinks twice as much
+            item3.style.flex = '0 0 150px';    // Cannot shrink
+            // Use different colors to show shrinking behavior
+            item1.style.backgroundColor = '#ffc107';
+            item2.style.backgroundColor = '#dc3545';
+            item3.style.backgroundColor = '#17a2b8';
+            info.innerHTML = '<strong>Flex-Shrink:</strong> Item 1 (shrink: 1), Item 2 (shrink: 2), Item 3 (shrink: 0)<br>Container width: 300px, each item basis: 150px. Item 2 shrinks twice as much as Item 1. Item 3 doesn\'t shrink.';
+            break;
+            
+          case 'basis':
+            // Demonstrate flex-basis: initial size before growing/shrinking
+            item1.style.flex = '0 0 100px';    // Fixed 100px width
+            item2.style.flex = '0 0 200px';    // Fixed 200px width
+            item3.style.flex = '0 0 150px';    // Fixed 150px width
+            // Use different colors to show size differences
+            item1.style.backgroundColor = '#fd7e14';
+            item2.style.backgroundColor = '#6f42c1';
+            item3.style.backgroundColor = '#20c997';
+            info.innerHTML = '<strong>Flex-Basis:</strong> Item 1 (100px), Item 2 (200px), Item 3 (150px)<br>Items have fixed widths based on their flex-basis values';
+            break;
+            
+          case 'combined':
+            // Demonstrate how grow, shrink, and basis work together
+            item1.style.flex = '1 1 100px';    // Can grow and shrink from 100px
+            item2.style.flex = '2 2 50px';     // Grows/shrinks twice as much from 50px
+            item3.style.flex = '1 0 200px';    // Can grow but not shrink from 200px
+            // Use different colors to show combined behavior
+            item1.style.backgroundColor = '#e83e8c';
+            item2.style.backgroundColor = '#6610f2';
+            item3.style.backgroundColor = '#fd7e14';
+            info.innerHTML = '<strong>Combined:</strong> Item 1 (1 1 100px), Item 2 (2 2 50px), Item 3 (1 0 200px)<br>Shows grow, shrink, and basis working together';
+            break;
+        }
+      }
+      
+      // Initialize the flex demonstration when the page loads
+      // This ensures students see a working example immediately
+      document.addEventListener('DOMContentLoaded', function() {
+        setFlexProperty('grow');
+      });
     </script>
   </body>
 </html>

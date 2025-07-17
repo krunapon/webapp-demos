@@ -5,20 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navigation Concepts Demo</title>
     <style>
-      /* Reset and base styles */
+      /* =====================================================
+         CSS RESET AND BASE STYLES
+         ===================================================== */
+
+      /* Universal selector resets margin, padding, and box-sizing
+         This ensures consistent behavior across all browsers
+         Box-sizing: border-box makes width/height calculations include padding and borders */
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
+      /* Base body styling - sets consistent font and creates neutral background
+         The padding provides breathing room around the entire demo */
       body {
         font-family: Arial, sans-serif;
         background-color: #f5f5f5;
         padding: 20px;
       }
 
-      /* Container for all demos */
+      /* =====================================================
+         LAYOUT CONTAINER STYLES
+         ===================================================== */
+
+      /* Main container provides centered layout with consistent styling
+         Max-width prevents content from stretching too wide on large screens
+         Margin auto centers the container horizontally */
       .demo-container {
         max-width: 800px;
         margin: 0 auto;
@@ -28,7 +42,8 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
-      /* Section headers */
+      /* Typography hierarchy - h1 for main title, h2 for section headers
+         Consistent color scheme and spacing creates visual hierarchy */
       h1 {
         color: #333;
         text-align: center;
@@ -39,10 +54,11 @@
         color: #666;
         margin: 20px 0 10px 0;
         padding-bottom: 5px;
-        border-bottom: 2px solid #ddd;
+        border-bottom: 2px solid #ddd; /* Visual separator for sections */
       }
 
-      /* Demo sections */
+      /* Each demo section gets consistent spacing and subtle background
+         This helps students visually separate different concepts */
       .demo-section {
         margin-bottom: 30px;
         padding: 15px;
@@ -50,47 +66,62 @@
         border-radius: 5px;
       }
 
-      /* Toggle buttons for switching navigation methods */
+      /* =====================================================
+         INTERACTIVE BUTTON STYLES
+         ===================================================== */
+
+      /* Toggle buttons for switching between navigation methods
+         Consistent styling with hover and active states teaches interaction design */
       .toggle-btn {
         padding: 8px 16px;
         margin: 5px;
-        background-color: #007bff;
+        background-color: #007bff; /* Primary blue color */
         color: white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s; /* Smooth color transition on hover */
       }
 
+      /* Hover state provides immediate visual feedback
+         This is crucial for user experience design */
       .toggle-btn:hover {
-        background-color: #0056b3;
+        background-color: #0056b3; /* Darker blue on hover */
       }
 
+      /* Active state shows which method is currently selected
+         Green color clearly indicates the active choice */
       .toggle-btn.active {
-        background-color: #28a745;
+        background-color: #28a745; /* Green for active state */
       }
 
-      /* Content area that changes based on navigation clicks */
+      /* Content area that updates based on navigation interactions
+         This demonstrates how navigation affects page content */
       .content-area {
         margin-top: 15px;
         padding: 15px;
-        background-color: #e9ecef;
+        background-color: #e9ecef; /* Light gray background */
         border-radius: 4px;
-        min-height: 60px;
+        min-height: 60px; /* Ensures consistent height even with short content */
       }
 
-      /* =================================================
-           1. VERTICAL NAVIGATION STYLES
-           ================================================= */
+      /* =====================================================
+         VERTICAL NAVIGATION STYLES
+         Purpose: Demonstrates sidebar-style navigation
+         Common in: Admin panels, desktop applications, sidebars
+         ===================================================== */
 
-      /* Container for vertical nav demo */
+      /* Flexbox layout places navigation and content side by side
+         Gap property provides consistent spacing between elements */
       .vertical-demo {
         display: flex;
         gap: 20px;
-        align-items: flex-start;
+        align-items: flex-start; /* Aligns items to top */
       }
 
-      /* Vertical navigation list - removes default list styling */
+      /* Removes default list styling (bullets, margins)
+         Sets fixed width for consistent layout
+         Background color creates visual container */
       .vertical-nav ul {
         list-style-type: none;
         width: 150px;
@@ -98,46 +129,57 @@
         border-radius: 4px;
       }
 
-      /* Vertical navigation links - block display creates full-width clickable area */
+      /* Block display makes entire link area clickable
+         This is a key usability principle - larger click targets are better
+         Text decoration removes default underline */
       .vertical-nav li a {
         display: block;
         color: #333;
         padding: 10px 15px;
         text-decoration: none;
-        border-bottom: 1px solid #ddd;
-        transition: all 0.3s ease;
+        border-bottom: 1px solid #ddd; /* Subtle separator between items */
+        transition: all 0.3s ease; /* Smooth transitions for professional feel */
       }
 
-      /* Hover effect for vertical navigation */
+      /* Hover effect provides immediate visual feedback
+         Dark background with white text creates strong contrast */
       .vertical-nav li a:hover {
         background-color: #555;
         color: white;
       }
 
-      /* Active state for current page */
+      /* Active state shows current page location
+         This is essential for navigation usability */
       .vertical-nav li a.active {
         background-color: #007bff;
         color: white;
       }
 
-      /* =================================================
-           2. HORIZONTAL NAVIGATION STYLES
-           ================================================= */
+      /* =====================================================
+         HORIZONTAL NAVIGATION STYLES
+         Purpose: Demonstrates three different CSS methods for horizontal layout
+         Teaching point: Multiple approaches can achieve same visual result
+         ===================================================== */
 
-      /* Method 1: Inline Display */
+      /* METHOD 1: INLINE DISPLAY
+         Older method but still useful for simple layouts
+         Advantage: Simple and straightforward
+         Disadvantage: Limited layout control */
       .inline-nav ul {
         list-style-type: none;
-        background-color: #333;
+        background-color: #333; /* Dark background for contrast */
         border-radius: 4px;
         padding: 0;
       }
 
-      /* Display list items inline (side by side) */
+      /* Display: inline removes line breaks between list items
+         This creates horizontal layout */
       .inline-nav li {
         display: inline;
       }
 
-      /* Inline-block allows padding and creates clickable areas */
+      /* Inline-block allows padding while keeping items on same line
+         This creates clickable areas around text */
       .inline-nav li a {
         display: inline-block;
         color: white;
@@ -150,15 +192,19 @@
         background-color: #555;
       }
 
-      /* Method 2: Float (Legacy approach) */
+      /* METHOD 2: FLOAT (Legacy approach)
+         Important for students to understand but not recommended for new projects
+         Advantage: Historically important, widely supported
+         Disadvantage: Requires clearfix, can cause layout issues */
       .float-nav ul {
         list-style-type: none;
         background-color: #333;
         border-radius: 4px;
-        overflow: hidden; /* Clearfix for floated elements */
+        overflow: hidden; /* Clearfix - contains floated elements */
       }
 
-      /* Float left makes elements line up horizontally */
+      /* Float: left makes elements line up horizontally
+         This was the primary method before flexbox */
       .float-nav li {
         float: left;
       }
@@ -175,15 +221,19 @@
         background-color: #555;
       }
 
-      /* Method 3: Flexbox (Modern approach) */
+      /* METHOD 3: FLEXBOX (Modern approach)
+         Recommended method for modern web development
+         Advantage: Powerful, flexible, handles edge cases well
+         Disadvantage: Requires understanding of flexbox concepts */
       .flex-nav ul {
         list-style-type: none;
         background-color: #333;
         border-radius: 4px;
-        display: flex; /* Flexbox layout */
+        display: flex; /* Creates flexible layout container */
       }
 
-      /* Each flex item takes equal space */
+      /* Flex: 1 makes each item take equal space
+         This creates evenly distributed navigation items */
       .flex-nav li {
         flex: 1;
       }
@@ -193,7 +243,7 @@
         color: white;
         padding: 12px 20px;
         text-decoration: none;
-        text-align: center;
+        text-align: center; /* Centers text in each flex item */
         transition: background-color 0.3s;
       }
 
@@ -201,11 +251,14 @@
         background-color: #555;
       }
 
-      /* =================================================
-           3. DROPDOWN NAVIGATION STYLES
-           ================================================= */
+      /* =====================================================
+         DROPDOWN NAVIGATION STYLES
+         Purpose: Demonstrates complex navigation hierarchies
+         Key concept: CSS positioning (relative + absolute)
+         ===================================================== */
 
-      /* Main dropdown navigation container */
+      /* Main dropdown container uses flexbox for horizontal layout
+         Justify-content: center centers the navigation */
       .dropdown-nav ul {
         list-style-type: none;
         background-color: #333;
@@ -214,12 +267,14 @@
         justify-content: center;
       }
 
-      /* Dropdown container - relative positioning for absolute dropdown */
+      /* Relative positioning creates positioning context for absolute children
+         This is crucial for dropdown functionality */
       .dropdown {
         position: relative;
       }
 
-      /* Main navigation links */
+      /* Standard navigation link styling
+         Consistent with other navigation methods */
       .dropdown-nav a {
         display: block;
         color: white;
@@ -232,39 +287,52 @@
         background-color: #555;
       }
 
-      /* Hidden dropdown content - positioned absolutely */
+      /* The dropdown content - hidden by default
+         Absolute positioning removes it from document flow
+         Z-index ensures it appears above other content */
       .dropdown-content {
-        display: none; /* Hidden by default */
-        position: absolute; /* Positioned relative to parent */
+        display: none; /* Hidden by default - key to dropdown functionality */
+        position: absolute; /* Positioned relative to .dropdown parent */
         background-color: #f9f9f9;
         min-width: 160px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 1;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        z-index: 1; /* Ensures dropdown appears above other content */
         border-radius: 4px;
-        overflow: hidden;
+        overflow: hidden; /* Ensures rounded corners work properly */
       }
 
-      /* Show dropdown on hover */
+      /* CSS :hover pseudo-class shows dropdown on hover
+         This is pure CSS interaction without JavaScript
+         Teaching point: CSS can handle simple interactions */
       .dropdown:hover .dropdown-content {
         display: block;
       }
 
-      /* Dropdown link styling */
+      /* Dropdown links have different styling than main navigation
+         Demonstrates how nested elements can have different appearance */
       .dropdown-content a {
-        color: #333;
+        color: #333; /* Dark text on light background */
         padding: 10px 15px;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid #ddd; /* Separators between items */
       }
 
       .dropdown-content a:hover {
-        background-color: #f1f1f1;
+        background-color: #f1f1f1; /* Subtle hover effect */
       }
 
-      /* Hidden sections for method switching */
+      /* =====================================================
+         METHOD SWITCHING FUNCTIONALITY
+         Purpose: Allows students to compare different CSS approaches
+         ===================================================== */
+
+      /* Initially hidden method demos
+         JavaScript will show/hide these based on button clicks */
       .method-demo {
         display: none;
       }
 
+      /* Active method demo is visible
+         This creates the switching functionality */
       .method-demo.active {
         display: block;
       }
@@ -275,17 +343,28 @@
       <h1>Navigation Concepts Demo</h1>
 
       <!-- ===============================================
-             1. VERTICAL NAVIGATION DEMO
-             =============================================== -->
+           VERTICAL NAVIGATION DEMO
+           
+           Learning objectives:
+           - Understand semantic HTML structure
+           - Learn about block vs inline display
+           - Practice CSS positioning concepts
+           - Understand active states and user feedback
+           =============================================== -->
       <div class="demo-section">
         <h2>1. Vertical Navigation</h2>
         <p><strong>Use:</strong> Sidebars, admin panels, desktop apps</p>
 
         <div class="vertical-demo">
-          <!-- Semantic HTML: nav element with unordered list -->
+          <!-- Semantic HTML structure: nav > ul > li > a
+               This structure is accessible and meaningful to screen readers
+               The nav element indicates navigation landmark -->
           <nav class="vertical-nav">
             <ul>
               <li>
+                <!-- onclick demonstrates JavaScript event handling
+                     'this' refers to the clicked element
+                     preventDefault is handled globally to stop page navigation -->
                 <a href="#" class="active" onclick="setActive(this, 'Home')"
                   >Home</a
                 >
@@ -298,7 +377,8 @@
             </ul>
           </nav>
 
-          <!-- Content area that updates based on navigation -->
+          <!-- Content area demonstrates how navigation affects page content
+               ID allows JavaScript to target this specific element -->
           <div class="content-area" id="vertical-content">
             <strong>Home Content</strong><br />
             Click navigation links to see content change and active states.
@@ -307,13 +387,20 @@
       </div>
 
       <!-- ===============================================
-             2. HORIZONTAL NAVIGATION DEMO
-             =============================================== -->
+           HORIZONTAL NAVIGATION DEMO
+           
+           Learning objectives:
+           - Compare three different CSS layout methods
+           - Understand evolution of web layout techniques
+           - Practice method switching with JavaScript
+           - Learn about CSS transitions and hover effects
+           =============================================== -->
       <div class="demo-section">
         <h2>2. Horizontal Navigation Methods</h2>
         <p><strong>Use:</strong> Main site navigation, headers, top menus</p>
 
-        <!-- Buttons to switch between different CSS methods -->
+        <!-- Method switching buttons demonstrate JavaScript DOM manipulation
+             Each button shows/hides different CSS implementations -->
         <div>
           <button class="toggle-btn active" onclick="showMethod('inline')">
             Inline Display
@@ -326,7 +413,9 @@
           </button>
         </div>
 
-        <!-- Method 1: Inline Display -->
+        <!-- Method 1: Inline Display
+             Demonstrates how display: inline creates horizontal layout
+             Students can see the CSS and test the functionality -->
         <div id="inline-demo" class="method-demo active">
           <h3>Method 1: Inline Display</h3>
           <nav class="inline-nav">
@@ -349,7 +438,9 @@
           </nav>
         </div>
 
-        <!-- Method 2: Float -->
+        <!-- Method 2: Float
+             Shows legacy approach for historical context
+             Important for understanding existing codebases -->
         <div id="float-demo" class="method-demo">
           <h3>Method 2: Float (Legacy)</h3>
           <nav class="float-nav">
@@ -372,7 +463,9 @@
           </nav>
         </div>
 
-        <!-- Method 3: Flexbox -->
+        <!-- Method 3: Flexbox
+             Demonstrates modern CSS layout approach
+             Recommended for new projects -->
         <div id="flex-demo" class="method-demo">
           <h3>Method 3: Flexbox (Recommended)</h3>
           <nav class="flex-nav">
@@ -397,6 +490,8 @@
           </nav>
         </div>
 
+        <!-- Shared content area shows how different methods achieve same result
+             This reinforces that CSS is about presentation, not functionality -->
         <div class="content-area" id="horizontal-content">
           <strong>Inline Method Active</strong><br />
           Switch between methods to see different CSS approaches for the same
@@ -405,8 +500,14 @@
       </div>
 
       <!-- ===============================================
-             3. DROPDOWN NAVIGATION DEMO
-             =============================================== -->
+           DROPDOWN NAVIGATION DEMO
+           
+           Learning objectives:
+           - Understand CSS positioning (relative + absolute)
+           - Learn about z-index and layering
+           - Practice hover pseudo-classes
+           - Understand complex navigation hierarchies
+           =============================================== -->
       <div class="demo-section">
         <h2>3. Dropdown Navigation</h2>
         <p>
@@ -417,10 +518,12 @@
           <ul>
             <li><a href="#" onclick="updateDropdown('Home')">Home</a></li>
 
-            <!-- Dropdown container with hover functionality -->
+            <!-- Dropdown container demonstrates relative positioning
+                 The dropdown-content will be positioned relative to this element -->
             <li class="dropdown">
               <a href="#" onclick="updateDropdown('Products')">Products ▼</a>
-              <!-- Hidden dropdown content -->
+              <!-- Hidden dropdown content uses absolute positioning
+                   CSS :hover pseudo-class controls visibility -->
               <div class="dropdown-content">
                 <a href="#" onclick="updateDropdown('Web Design')"
                   >Web Design</a
@@ -434,6 +537,8 @@
               </div>
             </li>
 
+            <!-- Second dropdown demonstrates scalability
+                 Same structure can be repeated for multiple dropdowns -->
             <li class="dropdown">
               <a href="#" onclick="updateDropdown('Services')">Services ▼</a>
               <div class="dropdown-content">
@@ -450,6 +555,8 @@
           </ul>
         </nav>
 
+        <!-- Content area provides feedback for dropdown interactions
+             Helps students understand the relationship between UI and content -->
         <div class="content-area" id="dropdown-content">
           <strong>Dropdown Demo</strong><br />
           Hover over "Products" or "Services" to see dropdown menus.
@@ -457,27 +564,34 @@
       </div>
 
       <!-- ===============================================
-             4. KEY CONCEPTS SUMMARY
-             =============================================== -->
+           KEY CONCEPTS SUMMARY
+           
+           Teaching purpose: Reinforces main learning points
+           Provides reference for students to review
+           =============================================== -->
       <div class="demo-section">
         <h2>4. Key Concepts</h2>
         <ul>
           <li>
             <strong>Semantic HTML:</strong> Use &lt;nav&gt;, &lt;ul&gt;,
-            &lt;li&gt; for accessibility
+            &lt;li&gt; for accessibility and meaning
           </li>
           <li>
-            <strong>CSS Methods:</strong> Inline, Float, Flexbox each have
-            trade-offs
+            <strong>CSS Methods:</strong> Inline, Float, Flexbox each solve
+            horizontal layout differently
           </li>
           <li>
-            <strong>Positioning:</strong> Dropdowns use relative + absolute
-            positioning
+            <strong>Positioning:</strong> Dropdowns combine relative and
+            absolute positioning
           </li>
           <li>
-            <strong>Hover States:</strong> Provide visual feedback for better UX
+            <strong>Hover States:</strong> Provide immediate visual feedback for
+            better user experience
           </li>
-          <li><strong>Active States:</strong> Show current page location</li>
+          <li>
+            <strong>Active States:</strong> Show current page location for
+            navigation clarity
+          </li>
         </ul>
       </div>
     </div>
@@ -485,24 +599,44 @@
     <script>
       // ===============================================
       // JAVASCRIPT FUNCTIONS FOR INTERACTIVITY
+      //
+      // Teaching objectives:
+      // - Demonstrate DOM manipulation
+      // - Show event handling patterns
+      // - Practice function parameters and scope
+      // - Understand how JavaScript enhances HTML/CSS
       // ===============================================
 
       /**
        * Sets active state for vertical navigation
-       * @param {Element} clickedLink - The clicked navigation link
-       * @param {string} page - The page name to display
+       *
+       * Teaching points:
+       * - DOM traversal with closest() and querySelectorAll()
+       * - Class manipulation with classList
+       * - Template literals for dynamic content
+       *
+       * @param {Element} clickedLink - The clicked navigation link element
+       * @param {string} page - The page name to display in content area
        */
       function setActive(clickedLink, page) {
-        // Remove active class from all links in the same navigation
+        // Find the parent navigation container
+        // closest() travels up the DOM tree to find matching ancestor
         const nav = clickedLink.closest("nav");
+
+        // Remove active class from all links in this navigation
+        // querySelectorAll() returns all matching elements
+        // forEach() iterates over the NodeList
         nav.querySelectorAll("a").forEach((link) => {
           link.classList.remove("active");
         });
 
-        // Add active class to clicked link
+        // Add active class to the clicked link
+        // This creates the visual "current page" indicator
         clickedLink.classList.add("active");
 
-        // Update content area
+        // Update content area with dynamic content
+        // getElementById() targets specific element
+        // Template literals (backticks) allow variable interpolation
         document.getElementById(
           "vertical-content"
         ).innerHTML = `<strong>${page} Content</strong><br>You're now on the ${page} page. Notice the active state highlighting.`;
@@ -510,30 +644,45 @@
 
       /**
        * Shows different horizontal navigation methods
+       *
+       * Teaching points:
+       * - Show/hide elements with CSS classes
+       * - Event object usage (event.target)
+       * - Object literals for data mapping
+       *
        * @param {string} method - The method to display (inline, float, flex)
        */
       function showMethod(method) {
-        // Hide all method demos
+        // Hide all method demonstration sections
+        // This ensures only one method is visible at a time
         document.querySelectorAll(".method-demo").forEach((demo) => {
           demo.classList.remove("active");
         });
 
-        // Show selected method
+        // Show the selected method demonstration
+        // String concatenation creates the correct ID
         document.getElementById(method + "-demo").classList.add("active");
 
-        // Update button states
+        // Update button visual states
+        // Remove active class from all buttons
         document.querySelectorAll(".toggle-btn").forEach((btn) => {
           btn.classList.remove("active");
         });
+
+        // Add active class to clicked button
+        // event.target refers to the element that triggered the event
         event.target.classList.add("active");
 
-        // Update content area with method information
+        // Create user-friendly method names
+        // Object literal maps internal names to display names
         const methodNames = {
           inline: "Inline Display",
           float: "Float Method",
           flex: "Flexbox (Modern)",
         };
 
+        // Update content area to show which method is active
+        // This provides immediate feedback to users
         document.getElementById(
           "horizontal-content"
         ).innerHTML = `<strong>${methodNames[method]} Active</strong><br>Compare how each CSS method creates the same visual result.`;
@@ -541,10 +690,17 @@
 
       /**
        * Updates content for horizontal navigation clicks
-       * @param {string} method - The CSS method being used
-       * @param {string} page - The page name clicked
+       *
+       * Teaching points:
+       * - Function parameters for flexible functionality
+       * - Consistent user feedback patterns
+       *
+       * @param {string} method - The CSS method being demonstrated
+       * @param {string} page - The page name that was clicked
        */
       function updateContent(method, page) {
+        // Update content area with both method and page information
+        // This helps students understand the relationship between UI and content
         document.getElementById(
           "horizontal-content"
         ).innerHTML = `<strong>${page} - ${method} Method</strong><br>You clicked ${page} using the ${method} approach.`;
@@ -552,18 +708,28 @@
 
       /**
        * Updates content for dropdown navigation
-       * @param {string} page - The page or item selected
+       *
+       * Teaching points:
+       * - Consistent function naming patterns
+       * - How dropdowns relate to content hierarchy
+       *
+       * @param {string} page - The page or dropdown item selected
        */
       function updateDropdown(page) {
+        // Provide feedback for dropdown interactions
+        // This demonstrates how complex navigation affects content
         document.getElementById(
           "dropdown-content"
         ).innerHTML = `<strong>${page} Selected</strong><br>You selected ${page}. Dropdowns organize complex navigation hierarchies.`;
       }
 
-      // Prevent default link behavior for demo purposes
+      // Global event listener prevents default link behavior
+      // This allows the demo to work without actual page navigation
+      // Teaching point: Event delegation and preventDefault()
       document.addEventListener("click", function (e) {
+        // Check if clicked element is a link
         if (e.target.tagName === "A") {
-          e.preventDefault();
+          e.preventDefault(); // Prevent default link navigation
         }
       });
     </script>
