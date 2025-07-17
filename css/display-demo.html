@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Display Property - Interactive Demo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .section {
+        background: white;
+        margin: 20px 0;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .section h2 {
+        color: #333;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+      }
+
+      .demo-box {
+        background: #e9ecef;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+      }
+
+      /* 1. None vs Hidden */
+        .none { display: none; }
+        .hidden { visibility: hidden; }
+        .visible {
+            background: #dc3545;
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            text-align: center;
+        }
+        
+        .visibility-demo {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 2px dashed #6c757d;
+        }
+
+      /* 2. Flexbox */
+        .flex-container {
+            display: flex;
+            background: #e9ecef;
+            padding: 10px;
+            margin: 10px 0;
+            gap: 10px;
+        }
+        
+        .flex-item {
+            background: #6f42c1;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 4px;
+            min-width: 50px;
+        }
+        
+        .flex-grow { flex: 1; }
+        .flex-fixed { flex: 0 0 100px; }
+        .flex-grow-2 { flex: 2; }
+        .flex-shrink { flex: 0 1 200px; }
+        .flex-basis { flex: 0 0 150px; }
+        .flex-shrink-high { flex: 0 2 200px; }
+        
+        .flex-demo {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 2px dashed #6c757d;
+        }
+        
+        .flex-demo-container {
+            display: flex;
+            background: #e9ecef;
+            padding: 10px;
+            gap: 10px;
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .flex-demo-item {
+            background: #6f42c1;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+            min-width: 60px;
+        }
+        
+
+
+      /* 6. Grid */
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        background: #e9ecef;
+        padding: 10px;
+        margin: 10px 0;
+      }
+
+      .grid-item {
+        background: #fd7e14;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 4px;
+      }
+
+      /* 7. Table Display */
+      .table {
+        display: table;
+        width: 100%;
+        margin: 10px 0;
+      }
+      .table-row {
+        display: table-row;
+      }
+      .table-cell {
+        display: table-cell;
+        background: #20c997;
+        color: white;
+        padding: 10px;
+        border: 2px solid white;
+        text-align: center;
+      }
+
+      /* Interactive Toggle */
+      .toggle-demo {
+        background: #f8f9fa;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        border: 2px dashed #6c757d;
+      }
+
+      .toggle-item {
+        background: #007bff;
+        color: white;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+        border-radius: 4px;
+      }
+
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        margin: 3px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+      button.active {
+        background: #28a745;
+      }
+
+      code {
+        background: #f8f9fa;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-family: monospace;
+        color: #e83e8c;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Display Property - Essential Concepts</h1>
+    <!-- 1. Interactive Demo -->
+    <div class="section">
+      <h2>1. Interactive Demo</h2>
+      <p>
+        Click buttons to see how display properties affect the same elements:
+      </p>
+      <div>
+        <button onclick="setDisplay('block')" class="active">Block</button>
+        <button onclick="setDisplay('inline')">Inline</button>
+        <button onclick="setDisplay('inline-block')">Inline-Block</button>
+        <button onclick="setDisplay('flex')">Flex</button>
+        <button onclick="setDisplay('none')">None</button>
+      </div>
+      <div class ="property-description">
+        <p>
+        </p>
+      <div class="toggle-demo" id="demo-container">
+        <div class="toggle-item">Item 1</div>
+        <div class="toggle-item">Item 2</div>
+        <div class="toggle-item">Item 3</div>
+      </div>
+    </div>
+
+    <!-- 2. None vs Hidden -->
+    <div class="section">
+        <h2>2. None vs Hidden</h2>
+        <p><code>display: none</code> removes element, <code>visibility: hidden</code> keeps space</p>
+        <div>
+            <button onclick="toggleVisibility('none')">Toggle Display None</button>
+            <button onclick="toggleVisibility('hidden')">Toggle Visibility Hidden</button>
+            <button onclick="toggleVisibility('reset')">Show All</button>
+        </div>
+        <div class="visibility-demo" id="visibility-container">
+            <div class="visible">Visible Before</div>
+            <div class="visible" id="none-element">Display None Target</div>
+            <div class="visible" id="hidden-element">Visibility Hidden Target</div>
+            <div class="visible">Visible After</div>
+        </div>
+    </div>
+
+    <!-- 3. Flexbox -->
+    <h2>3. Interactive Flex Demo:</h2>
+            <div>
+                <button onclick="setFlexProperty('grow')">Show Flex-Grow</button>
+                <button onclick="setFlexProperty('shrink')">Show Flex-Shrink</button>
+                <button onclick="setFlexProperty('basis')">Show Flex-Basis</button>
+                <button onclick="setFlexProperty('combined')">Show Combined</button>
+            </div>
+            <div class="flex-demo" id="flex-container">
+                <div class="flex-demo-container" id="flex-demo-container">
+                    <div class="flex-demo-item" id="flex-item-1">Item 1</div>
+                    <div class="flex-demo-item" id="flex-item-2">Item 2</div>
+                    <div class="flex-demo-item" id="flex-item-3">Item 3</div>
+                </div>
+                <div id="flex-info" style="margin-top: 10px; font-size: 14px; color: #666;"></div>
+            </div>
+
+    <!-- 4. Grid -->
+    <div class="section">
+      <h2>4. Grid</h2>
+      <p><code>display: grid</code> - Two-dimensional layout system</p>
+      <div class="demo-box">
+        <div class="grid-container">
+          <div class="grid-item">1</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Table Display -->
+    <div class="section">
+      <h2>5. Table Display</h2>
+      <p>
+        <code>display: table/table-row/table-cell</code> - Table layout without
+        table markup
+      </p>
+      <div class="demo-box">
+        <div class="table">
+          <div class="table-row">
+            <div class="table-cell">Cell 1</div>
+            <div class="table-cell">Cell 2</div>
+          </div>
+          <div class="table-row">
+            <div class="table-cell">Cell 3</div>
+            <div class="table-cell">Cell 4</div
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <script>
+        function toggleVisibility(action) {
+            const noneElement = document.getElementById('none-element');
+            const hiddenElement = document.getElementById('hidden-element');
+            
+            if (action === 'none') {
+                noneElement.style.display = noneElement.style.display === 'none' ? 'block' : 'none';
+            } else if (action === 'hidden') {
+                hiddenElement.style.visibility = hiddenElement.style.visibility === 'hidden' ? 'visible' : 'hidden';
+            } else if (action === 'reset') {
+                noneElement.style.display = 'block';
+                hiddenElement.style.visibility = 'visible';
+            }
+        }
+        
+      function setDisplay(type) {
+        const container = document.getElementById("demo-container");
+        const items = container.querySelectorAll(".toggle-item");
+
+        // Update button states
+        document
+          .querySelectorAll("button")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        // Reset container
+        container.style.display = "block";
+
+        // Apply display type
+        items.forEach((item) => {
+          item.style.display = type;
+          item.style.width = "auto";
+          item.style.height = "auto";
+        });
+
+        // Special handling for different types
+        if (type === "flex") {
+          container.style.display = "flex";
+          container.style.gap = "10px";
+        } else if (type === "inline-block") {
+          items.forEach((item) => {
+            item.style.width = "100px";
+            item.style.height = "50px";
+          });
+        }
+
+        const result = document.querySelector(".property-description p");
+        result.textContent = `Display type set to: ${type}`;
+    }
+     function setFlexProperty(type) {
+            const container = document.getElementById('flex-demo-container');
+            const item1 = document.getElementById('flex-item-1');
+            const item2 = document.getElementById('flex-item-2');
+            const item3 = document.getElementById('flex-item-3');
+            const info = document.getElementById('flex-info');
+            
+            // Reset all items
+            [item1, item2, item3].forEach(item => {
+                item.style.flex = '';
+                item.style.backgroundColor = '#6f42c1';
+            });
+            
+            // Set container width for shrink demo
+            container.style.width = type === 'shrink' ? '300px' : '100%';
+            
+            switch(type) {
+                case 'grow':
+                    item1.style.flex = '1';
+                    item2.style.flex = '2';
+                    item3.style.flex = '1';
+                    item1.style.backgroundColor = '#28a745';
+                    item2.style.backgroundColor = '#dc3545';
+                    item3.style.backgroundColor = '#28a745';
+                    info.innerHTML = '<strong>Flex-Grow:</strong> Item 1 (flex: 1), Item 2 (flex: 2), Item 3 (flex: 1)<br>Item 2 grows twice as much as Items 1 and 3';
+                    break;
+                    
+                case 'shrink':
+                    item1.style.flex = '0 1 150px';
+                    item2.style.flex = '0 2 150px';
+                    item3.style.flex = '0 0 150px';
+                    item1.style.backgroundColor = '#ffc107';
+                    item2.style.backgroundColor = '#dc3545';
+                    item3.style.backgroundColor = '#17a2b8';
+                    info.innerHTML = '<strong>Flex-Shrink:</strong> Item 1 (shrink: 1), Item 2 (shrink: 2), Item 3 (shrink: 0)<br>Container width: 300px, each item basis: 150px. Item 2 shrinks twice as much as Item 1. Item 3 doesn\'t shrink.';
+                    break;
+                    
+                case 'basis':
+                    item1.style.flex = '0 0 100px';
+                    item2.style.flex = '0 0 200px';
+                    item3.style.flex = '0 0 150px';
+                    item1.style.backgroundColor = '#fd7e14';
+                    item2.style.backgroundColor = '#6f42c1';
+                    item3.style.backgroundColor = '#20c997';
+                    info.innerHTML = '<strong>Flex-Basis:</strong> Item 1 (100px), Item 2 (200px), Item 3 (150px)<br>Items have fixed widths based on their flex-basis values';
+                    break;
+                    
+                case 'combined':
+                    item1.style.flex = '1 1 100px';
+                    item2.style.flex = '2 2 50px';
+                    item3.style.flex = '1 0 200px';
+                    item1.style.backgroundColor = '#e83e8c';
+                    item2.style.backgroundColor = '#6610f2';
+                    item3.style.backgroundColor = '#fd7e14';
+                    info.innerHTML = '<strong>Combined:</strong> Item 1 (1 1 100px), Item 2 (2 2 50px), Item 3 (1 0 200px)<br>Shows grow, shrink, and basis working together';
+                    break;
+            }
+        }
+        
+        // Initialize flex demo
+        document.addEventListener('DOMContentLoaded', function() {
+            setFlexProperty('grow');
+        });
+    </script>
+  </body>
+</html>
