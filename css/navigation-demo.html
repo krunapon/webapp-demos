@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigation Concepts Demo</title>
+    <style>
+      /* Reset and base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+      }
+
+      /* Container for all demos */
+      .demo-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Section headers */
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        color: #666;
+        margin: 20px 0 10px 0;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #ddd;
+      }
+
+      /* Demo sections */
+      .demo-section {
+        margin-bottom: 30px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+      }
+
+      /* Toggle buttons for switching navigation methods */
+      .toggle-btn {
+        padding: 8px 16px;
+        margin: 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .toggle-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .toggle-btn.active {
+        background-color: #28a745;
+      }
+
+      /* Content area that changes based on navigation clicks */
+      .content-area {
+        margin-top: 15px;
+        padding: 15px;
+        background-color: #e9ecef;
+        border-radius: 4px;
+        min-height: 60px;
+      }
+
+      /* =================================================
+           1. VERTICAL NAVIGATION STYLES
+           ================================================= */
+
+      /* Container for vertical nav demo */
+      .vertical-demo {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      /* Vertical navigation list - removes default list styling */
+      .vertical-nav ul {
+        list-style-type: none;
+        width: 150px;
+        background-color: #f1f1f1;
+        border-radius: 4px;
+      }
+
+      /* Vertical navigation links - block display creates full-width clickable area */
+      .vertical-nav li a {
+        display: block;
+        color: #333;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-bottom: 1px solid #ddd;
+        transition: all 0.3s ease;
+      }
+
+      /* Hover effect for vertical navigation */
+      .vertical-nav li a:hover {
+        background-color: #555;
+        color: white;
+      }
+
+      /* Active state for current page */
+      .vertical-nav li a.active {
+        background-color: #007bff;
+        color: white;
+      }
+
+      /* =================================================
+           2. HORIZONTAL NAVIGATION STYLES
+           ================================================= */
+
+      /* Method 1: Inline Display */
+      .inline-nav ul {
+        list-style-type: none;
+        background-color: #333;
+        border-radius: 4px;
+        padding: 0;
+      }
+
+      /* Display list items inline (side by side) */
+      .inline-nav li {
+        display: inline;
+      }
+
+      /* Inline-block allows padding and creates clickable areas */
+      .inline-nav li a {
+        display: inline-block;
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .inline-nav li a:hover {
+        background-color: #555;
+      }
+
+      /* Method 2: Float (Legacy approach) */
+      .float-nav ul {
+        list-style-type: none;
+        background-color: #333;
+        border-radius: 4px;
+        overflow: hidden; /* Clearfix for floated elements */
+      }
+
+      /* Float left makes elements line up horizontally */
+      .float-nav li {
+        float: left;
+      }
+
+      .float-nav li a {
+        display: block;
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .float-nav li a:hover {
+        background-color: #555;
+      }
+
+      /* Method 3: Flexbox (Modern approach) */
+      .flex-nav ul {
+        list-style-type: none;
+        background-color: #333;
+        border-radius: 4px;
+        display: flex; /* Flexbox layout */
+      }
+
+      /* Each flex item takes equal space */
+      .flex-nav li {
+        flex: 1;
+      }
+
+      .flex-nav li a {
+        display: block;
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s;
+      }
+
+      .flex-nav li a:hover {
+        background-color: #555;
+      }
+
+      /* =================================================
+           3. DROPDOWN NAVIGATION STYLES
+           ================================================= */
+
+      /* Main dropdown navigation container */
+      .dropdown-nav ul {
+        list-style-type: none;
+        background-color: #333;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* Dropdown container - relative positioning for absolute dropdown */
+      .dropdown {
+        position: relative;
+      }
+
+      /* Main navigation links */
+      .dropdown-nav a {
+        display: block;
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .dropdown-nav a:hover {
+        background-color: #555;
+      }
+
+      /* Hidden dropdown content - positioned absolutely */
+      .dropdown-content {
+        display: none; /* Hidden by default */
+        position: absolute; /* Positioned relative to parent */
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      /* Show dropdown on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Dropdown link styling */
+      .dropdown-content a {
+        color: #333;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+
+      /* Hidden sections for method switching */
+      .method-demo {
+        display: none;
+      }
+
+      .method-demo.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-container">
+      <h1>Navigation Concepts Demo</h1>
+
+      <!-- ===============================================
+             1. VERTICAL NAVIGATION DEMO
+             =============================================== -->
+      <div class="demo-section">
+        <h2>1. Vertical Navigation</h2>
+        <p><strong>Use:</strong> Sidebars, admin panels, desktop apps</p>
+
+        <div class="vertical-demo">
+          <!-- Semantic HTML: nav element with unordered list -->
+          <nav class="vertical-nav">
+            <ul>
+              <li>
+                <a href="#" class="active" onclick="setActive(this, 'Home')"
+                  >Home</a
+                >
+              </li>
+              <li><a href="#" onclick="setActive(this, 'News')">News</a></li>
+              <li>
+                <a href="#" onclick="setActive(this, 'Contact')">Contact</a>
+              </li>
+              <li><a href="#" onclick="setActive(this, 'About')">About</a></li>
+            </ul>
+          </nav>
+
+          <!-- Content area that updates based on navigation -->
+          <div class="content-area" id="vertical-content">
+            <strong>Home Content</strong><br />
+            Click navigation links to see content change and active states.
+          </div>
+        </div>
+      </div>
+
+      <!-- ===============================================
+             2. HORIZONTAL NAVIGATION DEMO
+             =============================================== -->
+      <div class="demo-section">
+        <h2>2. Horizontal Navigation Methods</h2>
+        <p><strong>Use:</strong> Main site navigation, headers, top menus</p>
+
+        <!-- Buttons to switch between different CSS methods -->
+        <div>
+          <button class="toggle-btn active" onclick="showMethod('inline')">
+            Inline Display
+          </button>
+          <button class="toggle-btn" onclick="showMethod('float')">
+            Float Method
+          </button>
+          <button class="toggle-btn" onclick="showMethod('flex')">
+            Flexbox (Modern)
+          </button>
+        </div>
+
+        <!-- Method 1: Inline Display -->
+        <div id="inline-demo" class="method-demo active">
+          <h3>Method 1: Inline Display</h3>
+          <nav class="inline-nav">
+            <ul>
+              <li>
+                <a href="#" onclick="updateContent('Inline', 'Home')">Home</a>
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Inline', 'News')">News</a>
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Inline', 'Contact')"
+                  >Contact</a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Inline', 'About')">About</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Method 2: Float -->
+        <div id="float-demo" class="method-demo">
+          <h3>Method 2: Float (Legacy)</h3>
+          <nav class="float-nav">
+            <ul>
+              <li>
+                <a href="#" onclick="updateContent('Float', 'Home')">Home</a>
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Float', 'News')">News</a>
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Float', 'Contact')"
+                  >Contact</a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Float', 'About')">About</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Method 3: Flexbox -->
+        <div id="flex-demo" class="method-demo">
+          <h3>Method 3: Flexbox (Recommended)</h3>
+          <nav class="flex-nav">
+            <ul>
+              <li>
+                <a href="#" onclick="updateContent('Flexbox', 'Home')">Home</a>
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Flexbox', 'News')">News</a>
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Flexbox', 'Contact')"
+                  >Contact</a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="updateContent('Flexbox', 'About')"
+                  >About</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="content-area" id="horizontal-content">
+          <strong>Inline Method Active</strong><br />
+          Switch between methods to see different CSS approaches for the same
+          result.
+        </div>
+      </div>
+
+      <!-- ===============================================
+             3. DROPDOWN NAVIGATION DEMO
+             =============================================== -->
+      <div class="demo-section">
+        <h2>3. Dropdown Navigation</h2>
+        <p>
+          <strong>Use:</strong> Complex site structures, categorized content
+        </p>
+
+        <nav class="dropdown-nav">
+          <ul>
+            <li><a href="#" onclick="updateDropdown('Home')">Home</a></li>
+
+            <!-- Dropdown container with hover functionality -->
+            <li class="dropdown">
+              <a href="#" onclick="updateDropdown('Products')">Products ▼</a>
+              <!-- Hidden dropdown content -->
+              <div class="dropdown-content">
+                <a href="#" onclick="updateDropdown('Web Design')"
+                  >Web Design</a
+                >
+                <a href="#" onclick="updateDropdown('Mobile Apps')"
+                  >Mobile Apps</a
+                >
+                <a href="#" onclick="updateDropdown('SEO Services')"
+                  >SEO Services</a
+                >
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" onclick="updateDropdown('Services')">Services ▼</a>
+              <div class="dropdown-content">
+                <a href="#" onclick="updateDropdown('Consulting')"
+                  >Consulting</a
+                >
+                <a href="#" onclick="updateDropdown('Development')"
+                  >Development</a
+                >
+              </div>
+            </li>
+
+            <li><a href="#" onclick="updateDropdown('Contact')">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="content-area" id="dropdown-content">
+          <strong>Dropdown Demo</strong><br />
+          Hover over "Products" or "Services" to see dropdown menus.
+        </div>
+      </div>
+
+      <!-- ===============================================
+             4. KEY CONCEPTS SUMMARY
+             =============================================== -->
+      <div class="demo-section">
+        <h2>4. Key Concepts</h2>
+        <ul>
+          <li>
+            <strong>Semantic HTML:</strong> Use &lt;nav&gt;, &lt;ul&gt;,
+            &lt;li&gt; for accessibility
+          </li>
+          <li>
+            <strong>CSS Methods:</strong> Inline, Float, Flexbox each have
+            trade-offs
+          </li>
+          <li>
+            <strong>Positioning:</strong> Dropdowns use relative + absolute
+            positioning
+          </li>
+          <li>
+            <strong>Hover States:</strong> Provide visual feedback for better UX
+          </li>
+          <li><strong>Active States:</strong> Show current page location</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // ===============================================
+      // JAVASCRIPT FUNCTIONS FOR INTERACTIVITY
+      // ===============================================
+
+      /**
+       * Sets active state for vertical navigation
+       * @param {Element} clickedLink - The clicked navigation link
+       * @param {string} page - The page name to display
+       */
+      function setActive(clickedLink, page) {
+        // Remove active class from all links in the same navigation
+        const nav = clickedLink.closest("nav");
+        nav.querySelectorAll("a").forEach((link) => {
+          link.classList.remove("active");
+        });
+
+        // Add active class to clicked link
+        clickedLink.classList.add("active");
+
+        // Update content area
+        document.getElementById(
+          "vertical-content"
+        ).innerHTML = `<strong>${page} Content</strong><br>You're now on the ${page} page. Notice the active state highlighting.`;
+      }
+
+      /**
+       * Shows different horizontal navigation methods
+       * @param {string} method - The method to display (inline, float, flex)
+       */
+      function showMethod(method) {
+        // Hide all method demos
+        document.querySelectorAll(".method-demo").forEach((demo) => {
+          demo.classList.remove("active");
+        });
+
+        // Show selected method
+        document.getElementById(method + "-demo").classList.add("active");
+
+        // Update button states
+        document.querySelectorAll(".toggle-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        event.target.classList.add("active");
+
+        // Update content area with method information
+        const methodNames = {
+          inline: "Inline Display",
+          float: "Float Method",
+          flex: "Flexbox (Modern)",
+        };
+
+        document.getElementById(
+          "horizontal-content"
+        ).innerHTML = `<strong>${methodNames[method]} Active</strong><br>Compare how each CSS method creates the same visual result.`;
+      }
+
+      /**
+       * Updates content for horizontal navigation clicks
+       * @param {string} method - The CSS method being used
+       * @param {string} page - The page name clicked
+       */
+      function updateContent(method, page) {
+        document.getElementById(
+          "horizontal-content"
+        ).innerHTML = `<strong>${page} - ${method} Method</strong><br>You clicked ${page} using the ${method} approach.`;
+      }
+
+      /**
+       * Updates content for dropdown navigation
+       * @param {string} page - The page or item selected
+       */
+      function updateDropdown(page) {
+        document.getElementById(
+          "dropdown-content"
+        ).innerHTML = `<strong>${page} Selected</strong><br>You selected ${page}. Dropdowns organize complex navigation hierarchies.`;
+      }
+
+      // Prevent default link behavior for demo purposes
+      document.addEventListener("click", function (e) {
+        if (e.target.tagName === "A") {
+          e.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>
