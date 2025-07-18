@@ -1,0 +1,187 @@
+/* =================================================================
+   BASIC TABLE STRUCTURE AND BORDERS
+   ================================================================= */
+
+/* Apply borders to all table elements
+   This creates the basic grid structure that makes data readable */
+table,
+th,    /* Table headers */
+td {
+  /* Table data cells */
+  border: 1px solid black;
+}
+
+/* =================================================================
+   TABLE LAYOUT FUNDAMENTALS
+   ================================================================= */
+
+/* Control how table borders display and set overall table width */
+table {
+  /* Merge adjacent borders instead of having double borders
+     This creates cleaner lines between cells */
+  border-collapse: collapse;
+
+  /* Make table span the full width of its container
+     This ensures consistent layout across different screen sizes */
+  width: 100%;
+}
+
+/* =================================================================
+   TEXT ALIGNMENT - HORIZONTAL POSITIONING
+   ================================================================= */
+
+/* Header alignment - typically used for column labels */
+th {
+  text-align: left; /* Default browser behavior is usually center */
+  /* Left alignment makes headers easier to read and scan,
+     especially for text-heavy data tables */
+}
+
+/* Data cell alignment - for the actual table content */
+td {
+  text-align: center; /* Default browser behavior is usually left */
+  /* Center alignment works well for numeric data, dates,
+     or short text values that need visual balance */
+}
+
+/* =================================================================
+   TEXT ALIGNMENT - VERTICAL POSITIONING
+   NOTE: There's an issue here with multiple declarations!
+   ================================================================= */
+
+th,
+td {
+  vertical-align: top; /* Align content to top of cell */
+  vertical-align: bottom; /* This overrides the previous line! */
+  vertical-align: middle; /* This overrides both previous lines! */
+
+  /* TEACHING MOMENT: Only the last declaration will be applied.
+     In this case, all content will be middle-aligned vertically.
+     This is a common mistake - each property should only be declared once
+     unless you're intentionally overriding in different contexts. */
+}
+
+/* =================================================================
+   CELL SPACING AND PADDING
+   NOTE: Another override issue here
+   ================================================================= */
+
+td {
+  padding: 8px; /* All sides get 8px of internal spacing */
+  padding: 12px 16px; /* This overrides above: 12px top/bottom, 16px left/right */
+
+  /* TEACHING MOMENT: The second padding declaration wins.
+     Padding creates breathing room inside cells, making content
+     more readable and giving the table a less cramped appearance. */
+}
+
+/* =================================================================
+   VISUAL ENHANCEMENT - ALTERNATING ROW COLORS
+   ================================================================= */
+
+/* Style even-numbered rows (2nd, 4th, 6th, etc.) */
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Light gray background */
+  /* This creates "zebra striping" which helps users track
+     data across rows, especially in wide tables */
+}
+
+/* Style odd-numbered rows (1st, 3rd, 5th, etc.) */
+tr:nth-child(odd) {
+  background-color: #f9f9f9; /* Very light gray, almost white */
+  /* NOTE: This conflicts with the even row styling above.
+     Typically you'd style either odd OR even rows, not both.
+     The browser will apply whichever rule has higher specificity
+     or comes last in the CSS. */
+}
+
+/* =================================================================
+   INTERACTIVE FEEDBACK - HOVER EFFECTS
+   ================================================================= */
+
+/* Provide visual feedback when users hover over rows */
+tr:hover {
+  background-color: #ddd; /* Darker gray on hover */
+  cursor: pointer; /* Change cursor to indicate interactivity */
+
+  /* This gives immediate feedback that rows are interactive,
+     improving user experience and suggesting that rows might
+     be clickable for more details or actions */
+}
+
+/* =================================================================
+   HEADER STYLING - VISUAL HIERARCHY
+   ================================================================= */
+
+/* Make headers visually distinct from data */
+th {
+  background-color: #4caf50; /* Professional green color */
+  color: white; /* White text for contrast against green */
+  font-weight: bold; /* Emphasize header text */
+  padding: 12px; /* Consistent spacing */
+  text-align: left; /* Repeated from earlier - could be consolidated */
+
+  /* Headers should clearly distinguish structure from content.
+     The green background creates a professional appearance while
+     ensuring headers stand out from the data rows below. */
+}
+
+/* =================================================================
+   SUBTLE BORDER STYLING
+   ================================================================= */
+
+/* Add subtle borders between rows instead of full grid */
+th,
+td {
+  border-bottom: 1px solid #ddd; /* Light gray bottom border only */
+  /* This creates horizontal lines that separate rows without
+     the visual heaviness of a full grid. Often preferred for
+     modern, clean table designs. */
+}
+
+/* =================================================================
+   SPECIFIC TABLE STYLING - ID-BASED TARGETING
+   NOTE: This section largely repeats styles from above
+   ================================================================= */
+
+/* Target a specific table with ID "customers" */
+#customers {
+  border-collapse: collapse; /* Repeated from general table styles */
+  width: 100%; /* Repeated from general table styles */
+  margin: 20px 0; /* Add vertical spacing around this table */
+
+  /* TEACHING MOMENT: This margin adds space above and below
+     the table, separating it from other page content */
+}
+
+/* Style cells within the customers table specifically */
+#customers th,
+#customers td {
+  border: 1px solid #ddd; /* Lighter border than the general table style */
+  padding: 12px; /* Consistent with header padding above */
+  text-align: left; /* Override the center alignment from general td rule */
+
+  /* The #customers selector has higher specificity than the general
+     th and td selectors, so these rules will take precedence */
+}
+
+/* Zebra striping for the customers table */
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2; /* Same as general even row styling */
+}
+
+/* Hover effect for customers table */
+#customers tr:hover {
+  background-color: #ddd; /* Same as general hover styling */
+}
+
+/* Header styling for customers table */
+#customers th {
+  background-color: #4caf50; /* Same green as general header styling */
+  color: white; /* Same as general header styling */
+  font-weight: bold; /* Same as general header styling */
+
+  /* TEACHING MOMENT: This repetition suggests the CSS could be
+     optimized by using more general selectors or CSS custom properties
+     for consistent theming across multiple tables */
+}
