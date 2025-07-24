@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Web Design Part 2 - Interactive Demo</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f5f5f5;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      /* Section Styling */
+      .section {
+        background: white;
+        margin: 2rem 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .section-header {
+        background: #3498db;
+        color: white;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .section-header:hover {
+        background: #2980b9;
+      }
+
+      .section-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .toggle-icon {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .section-header.active .toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      .section-content {
+        padding: 2rem;
+        display: none;
+      }
+
+      .section-content.active {
+        display: block;
+      }
+
+      /* 1. Responsive Images Demo */
+      .image-comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .image-demo {
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #f8f9fa;
+      }
+
+      .image-demo h4 {
+        background: #e9ecef;
+        padding: 1rem;
+        margin: 0;
+        text-align: center;
+        color: #495057;
+      }
+
+      .image-container {
+        padding: 1rem;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .demo-image {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border-radius: 4px;
+      }
+
+      .width-100 {
+        width: 100%;
+        height: 150px;
+      }
+
+      .max-width-100 {
+        max-width: 100%;
+        width: 300px;
+        height: 100px;
+      }
+
+      /* Object-fit Demo */
+      .object-fit-demo {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .fit-example {
+        text-align: center;
+      }
+
+      .fit-container {
+        width: 200px;
+        height: 150px;
+        border: 2px solid #ddd;
+        margin: 0 auto 1rem;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+
+      .fit-image {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #fad0c4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+
+      .object-fill {
+        object-fit: fill;
+      }
+      .object-contain {
+        object-fit: contain;
+      }
+      .object-cover {
+        object-fit: cover;
+      }
+      .object-none {
+        object-fit: none;
+      }
+      .object-scale-down {
+        object-fit: scale-down;
+      }
+
+      /* 2. Flexbox Demo */
+      .flex-demo {
+        margin: 2rem 0;
+      }
+
+      .flex-container {
+        display: flex;
+        background: #e9ecef;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        min-height: 100px;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .flex-item {
+        background: #3498db;
+        color: white;
+        padding: 1rem;
+        border-radius: 4px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .flex-controls {
+        display: flex;
+        gap: 1rem;
+        margin: 1rem 0;
+        flex-wrap: wrap;
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .control-group label {
+        font-weight: bold;
+        color: #495057;
+      }
+
+      .control-group select,
+      .control-group button {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+      }
+
+      .control-group button {
+        background: #28a745;
+        color: white;
+        border: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .control-group button:hover {
+        background: #218838;
+      }
+
+      /* Responsive Navigation Demo */
+      .nav-demo {
+        margin: 2rem 0;
+      }
+
+      .demo-navbar {
+        background: #2c3e50;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        color: white;
+      }
+
+      .nav-brand {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        background: #34495e;
+      }
+
+      .nav-menu li a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 1rem 1.5rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .nav-menu li a:hover {
+        background: #3498db;
+      }
+
+      /* Width Simulator */
+      .width-simulator {
+        margin: 2rem 0;
+      }
+
+      .simulator-controls {
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .width-slider {
+        width: 300px;
+        margin: 0 1rem;
+      }
+
+      .width-display {
+        font-weight: bold;
+        color: #3498db;
+        margin: 0.5rem 0;
+      }
+
+      .simulator-frame {
+        border: 3px solid #333;
+        border-radius: 10px;
+        margin: 0 auto;
+        transition: width 0.3s ease;
+        overflow: hidden;
+        background: white;
+        position: relative;
+      }
+
+      .simulator-frame::before {
+        content: attr(data-device);
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #333;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+
+      .simulator-content {
+        padding: 1rem;
+      }
+
+      .simulator-nav {
+        display: flex;
+        background: #3498db;
+        margin: -1rem -1rem 1rem -1rem;
+      }
+
+      .simulator-nav a {
+        color: white;
+        text-decoration: none;
+        padding: 0.75rem 1rem;
+        flex: 1;
+        text-align: center;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .simulator-nav a:hover {
+        background: #2980b9;
+      }
+
+      .simulator-cards {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .simulator-card {
+        flex: 1;
+        min-width: 150px;
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid #e9ecef;
+      }
+
+      .simulator-card h4 {
+        color: #3498db;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Code Examples */
+      .code-example {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+        overflow-x: auto;
+        position: relative;
+      }
+
+      .code-example::before {
+        content: "CSS";
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+        background: #4299e1;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+      }
+
+      .code-comment {
+        color: #68d391;
+      }
+
+      .code-property {
+        color: #63b3ed;
+      }
+
+      .code-value {
+        color: #f6e05e;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .image-comparison {
+          grid-template-columns: 1fr;
+        }
+
+        .object-fit-demo {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .nav-toggle {
+          display: block;
+        }
+
+        .nav-menu {
+          display: none;
+          flex-direction: column;
+        }
+
+        .nav-menu.active {
+          display: flex;
+        }
+
+        .nav-menu li a {
+          padding: 1rem;
+          border-bottom: 1px solid #2c3e50;
+        }
+
+        .flex-controls {
+          flex-direction: column;
+        }
+
+        .simulator-cards {
+          flex-direction: column;
+        }
+
+        .width-slider {
+          width: 250px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 10px;
+        }
+
+        .section-content {
+          padding: 1rem;
+        }
+
+        .object-fit-demo {
+          grid-template-columns: 1fr;
+        }
+
+        .fit-container {
+          width: 100%;
+          max-width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <h1>📱 Responsive Web Design Part 2</h1>
+        <p>
+          Interactive demonstrations of Images, Flexbox, and Responsive Testing
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- 1. Responsive Images -->
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <h2>🖼️ 1. Responsive Images</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+          <p>
+            <strong>Key Point:</strong> Images make up 50% of webpage size.
+            Proper responsive techniques prevent layout breaks.
+          </p>
+
+          <h3>width vs max-width Comparison</h3>
+          <div class="image-comparison">
+            <div class="image-demo">
+              <h4>width: 100%</h4>
+              <div class="image-container">
+                <div class="demo-image width-100">Stretches to container</div>
+              </div>
+              <p style="padding: 0 1rem 1rem; color: #666; font-size: 0.9rem">
+                Always fills container, may stretch beyond original size
+              </p>
+            </div>
+            <div class="image-demo">
+              <h4>max-width: 100%</h4>
+              <div class="image-container">
+                <div class="demo-image max-width-100">
+                  Never larger than original
+                </div>
+              </div>
+              <p style="padding: 0 1rem 1rem; color: #666; font-size: 0.9rem">
+                Scales down but maintains original max size (Recommended)
+              </p>
+            </div>
+          </div>
+
+          <div class="code-example">
+            <span class="code-comment"
+              >/* Use width: 100% when you want image to fill container */</span
+            >
+            .<span class="code-property">banner-image</span> {
+            <span class="code-property">width</span>:
+            <span class="code-value">100%</span>;
+            <span class="code-property">height</span>:
+            <span class="code-value">auto</span>; }
+
+            <span class="code-comment"
+              >/* Use max-width: 100% as general rule (Recommended) */</span
+            >
+            .<span class="code-property">responsive-image</span> {
+            <span class="code-property">max-width</span>:
+            <span class="code-value">100%</span>;
+            <span class="code-property">height</span>:
+            <span class="code-value">auto</span>; }
+          </div>
+
+          <h3>Object-fit Property Examples</h3>
+          <p>Controls how images fit within their containers:</p>
+          <div class="object-fit-demo">
+            <div class="fit-example">
+              <div class="fit-container">
+                <div class="fit-image object-fill">fill<br />(may distort)</div>
+              </div>
+              <strong>fill</strong>
+            </div>
+            <div class="fit-example">
+              <div class="fit-container">
+                <div class="fit-image object-contain">
+                  contain<br />(entire image visible)
+                </div>
+              </div>
+              <strong>contain</strong>
+            </div>
+            <div class="fit-example">
+              <div class="fit-container">
+                <div class="fit-image object-cover">
+                  cover<br />(fills container)
+                </div>
+              </div>
+              <strong>cover</strong>
+            </div>
+            <div class="fit-example">
+              <div class="fit-container">
+                <div class="fit-image object-none">
+                  none<br />(original size)
+                </div>
+              </div>
+              <strong>none</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. CSS Flexbox -->
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <h2>💪 2. CSS Flexbox</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content active">
+          <p>
+            <strong>Key Point:</strong> Flexbox is perfect for one-dimensional
+            layouts. Great for navigation, cards, and component-level layouts.
+          </p>
+
+          <div class="flex-demo">
+            <h3>Interactive Flexbox Demo</h3>
+            <div class="flex-controls">
+              <div class="control-group">
+                <label>Flex Direction:</label>
+                <select id="flexDirection" onchange="updateFlex()">
+                  <option value="row">row</option>
+                  <option value="column">column</option>
+                  <option value="row-reverse">row-reverse</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label>Justify Content:</label>
+                <select id="justifyContent" onchange="updateFlex()">
+                  <option value="flex-start">flex-start</option>
+                  <option value="center">center</option>
+                  <option value="space-between">space-between</option>
+                  <option value="space-around">space-around</option>
+                  <option value="space-evenly">space-evenly</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label>Align Items:</label>
+                <select id="alignItems" onchange="updateFlex()">
+                  <option value="stretch">stretch</option>
+                  <option value="flex-start">flex-start</option>
+                  <option value="center">center</option>
+                  <option value="flex-end">flex-end</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label>Items:</label>
+                <button onclick="addFlexItem()">Add Item</button>
+              </div>
+            </div>
+
+            <div class="flex-container" id="flexContainer">
+              <div class="flex-item">Item 1</div>
+              <div class="flex-item">Item 2</div>
+              <div class="flex-item">Item 3</div>
+            </div>
+          </div>
+
+          <div class="code-example">
+            <span class="code-comment">/* Basic Flexbox Setup */</span>
+            .<span class="code-property">flex-container</span> {
+            <span class="code-property">display</span>:
+            <span class="code-value">flex</span>;
+            <span class="code-property">flex-direction</span>:
+            <span class="code-value">row</span>;
+            <span class="code-comment">/* or column */</span>
+            <span class="code-property">justify-content</span>:
+            <span class="code-value">space-between</span>;
+            <span class="code-comment">/* horizontal alignment */</span>
+            <span class="code-property">align-items</span>:
+            <span class="code-value">center</span>;
+            <span class="code-comment">/* vertical alignment */</span>
+            <span class="code-property">gap</span>:
+            <span class="code-value">1rem</span>;
+            <span class="code-comment">/* space between items */</span> } .<span
+              class="code-property"
+              >flex-item</span
+            >
+            { <span class="code-property">flex</span>:
+            <span class="code-value">1</span>;
+            <span class="code-comment">/* grow to fill space */</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Responsive Navigation -->
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <h2>🧭 3. Responsive Navigation</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+          <p>
+            <strong>Key Point:</strong> Navigation should adapt from horizontal
+            (desktop) to vertical/hamburger (mobile).
+          </p>
+
+          <div class="nav-demo">
+            <div class="demo-navbar">
+              <div class="nav-header">
+                <div class="nav-brand">My Website</div>
+                <button class="nav-toggle" onclick="toggleNav()">☰</button>
+              </div>
+              <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <p style="margin-top: 1rem; color: #666; font-size: 0.9rem">
+              <strong>Try it:</strong> Resize your browser window or view on
+              mobile to see the navigation change!
+            </p>
+          </div>
+
+          <div class="code-example">
+            <span class="code-comment">/* Desktop Navigation */</span>
+            .<span class="code-property">nav-menu</span> {
+            <span class="code-property">display</span>:
+            <span class="code-value">flex</span>; }
+
+            <span class="code-comment">/* Mobile Navigation */</span>
+            @<span class="code-property">media</span> (<span class="code-value"
+              >max-width: 768px</span
+            >) { .<span class="code-property">nav-toggle</span> {
+            <span class="code-property">display</span>:
+            <span class="code-value">block</span>; } .<span
+              class="code-property"
+              >nav-menu</span
+            >
+            { <span class="code-property">display</span>:
+            <span class="code-value">none</span>;
+            <span class="code-property">flex-direction</span>:
+            <span class="code-value">column</span>; } .<span
+              class="code-property"
+              >nav-menu</span
+            >.<span class="code-property">active</span> {
+            <span class="code-property">display</span>:
+            <span class="code-value">flex</span>; } }
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Width Simulator -->
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <h2>📏 4. Responsive Width Simulator</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+          <p>
+            <strong>Key Point:</strong> Test how your design responds to
+            different screen widths.
+          </p>
+
+          <div class="width-simulator">
+            <div class="simulator-controls">
+              <label for="widthSlider">Screen Width:</label>
+              <input
+                type="range"
+                id="widthSlider"
+                class="width-slider"
+                min="320"
+                max="1200"
+                value="800"
+                oninput="updateSimulator(this.value)"
+              />
+              <div class="width-display" id="widthDisplay">800px</div>
+            </div>
+
+            <div
+              class="simulator-frame"
+              id="simulatorFrame"
+              style="width: 800px"
+              data-device="Tablet"
+            >
+              <div class="simulator-content">
+                <div class="simulator-nav">
+                  <a href="#">Home</a>
+                  <a href="#">About</a>
+                  <a href="#">Services</a>
+                  <a href="#">Contact</a>
+                </div>
+                <div class="simulator-cards">
+                  <div class="simulator-card">
+                    <h4>Feature 1</h4>
+                    <p>
+                      Responsive design adapts to any screen size automatically.
+                    </p>
+                  </div>
+                  <div class="simulator-card">
+                    <h4>Feature 2</h4>
+                    <p>Flexbox makes layouts flexible and easy to maintain.</p>
+                  </div>
+                  <div class="simulator-card">
+                    <h4>Feature 3</h4>
+                    <p>Images scale properly with proper CSS techniques.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-example">
+            <span class="code-comment">/* Common Breakpoints */</span>
+            <span class="code-comment">/* Mobile */</span>
+            @<span class="code-property">media</span> (<span class="code-value"
+              >max-width: 480px</span
+            >) { }
+
+            <span class="code-comment">/* Tablet */</span>
+            @<span class="code-property">media</span> (<span class="code-value"
+              >min-width: 481px</span
+            >) <span class="code-value">and</span> (<span class="code-value"
+              >max-width: 768px</span
+            >) { }
+
+            <span class="code-comment">/* Desktop */</span>
+            @<span class="code-property">media</span> (<span class="code-value"
+              >min-width: 769px</span
+            >) { }
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Framework Alternatives -->
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <h2>🛠️ 5. Framework Alternatives</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+          <p>
+            <strong>Key Point:</strong> Frameworks can speed up development but
+            may add complexity or file size.
+          </p>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 1rem;
+              margin: 2rem 0;
+            "
+          >
+            <div
+              style="
+                background: #f8f9fa;
+                padding: 1.5rem;
+                border-radius: 8px;
+                border-left: 4px solid #007bff;
+              "
+            >
+              <h4 style="color: #007bff; margin-bottom: 1rem">Bootstrap</h4>
+              <p style="font-size: 0.9rem; margin-bottom: 1rem">
+                Component-based framework
+              </p>
+              <ul style="font-size: 0.85rem; color: #666">
+                <li>✅ Quick development</li>
+                <li>✅ Large community</li>
+                <li>❌ Can be heavy</li>
+                <li>❌ Similar-looking sites</li>
+              </ul>
+            </div>
+
+            <div
+              style="
+                background: #f8f9fa;
+                padding: 1.5rem;
+                border-radius: 8px;
+                border-left: 4px solid #06b6d4;
+              "
+            >
+              <h4 style="color: #06b6d4; margin-bottom: 1rem">Tailwind CSS</h4>
+              <p style="font-size: 0.9rem; margin-bottom: 1rem">
+                Utility-first framework
+              </p>
+              <ul style="font-size: 0.85rem; color: #666">
+                <li>✅ Highly customizable</li>
+                <li>✅ Smaller file size</li>
+                <li>❌ Learning curve</li>
+                <li>❌ HTML can get cluttered</li>
+              </ul>
+            </div>
+
+            <div
+              style="
+                background: #f8f9fa;
+                padding: 1.5rem;
+                border-radius: 8px;
+                border-left: 4px solid #2563eb;
+              "
+            >
+              <h4 style="color: #2563eb; margin-bottom: 1rem">Foundation</h4>
+              <p style="font-size: 0.9rem; margin-bottom: 1rem">
+                Flexible framework
+              </p>
+              <ul style="font-size: 0.85rem; color: #666">
+                <li>✅ Semantic markup</li>
+                <li>✅ Advanced features</li>
+                <li>❌ Smaller community</li>
+                <li>❌ Complex for beginners</li>
+              </ul>
+            </div>
+
+            <div
+              style="
+                background: #f8f9fa;
+                padding: 1.5rem;
+                border-radius: 8px;
+                border-left: 4px solid #059669;
+              "
+            >
+              <h4 style="color: #059669; margin-bottom: 1rem">Custom CSS</h4>
+              <p style="font-size: 0.9rem; margin-bottom: 1rem">
+                Pure CSS approach
+              </p>
+              <ul style="font-size: 0.85rem; color: #666">
+                <li>✅ Complete control</li>
+                <li>✅ Minimal file size</li>
+                <li>❌ Time consuming</li>
+                <li>❌ Requires expertise</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testing Tools -->
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <h2>🧪 6. Testing Your Responsive Design</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+          <p>
+            <strong>Key Point:</strong> Always test on real devices and multiple
+            screen sizes.
+          </p>
+
+          <div
+            style="
+              background: #e3f2fd;
+              padding: 1.5rem;
+              border-radius: 8px;
+              margin: 1rem 0;
+            "
+          >
+            <h4 style="color: #1976d2; margin-bottom: 1rem">
+              🔧 Chrome DevTools Method:
+            </h4>
+            <ol style="color: #424242; line-height: 1.8">
+              <li>Press <strong>F12</strong> to open DevTools</li>
+              <li>
+                Press <strong>Ctrl+Shift+M</strong> (or Cmd+Shift+M on Mac)
+              </li>
+              <li>Select device preset or set custom dimensions</li>
+              <li>
+                Test common breakpoints: 375px (Mobile), 768px (Tablet), 1024px
+                (Desktop)
+              </li>
+            </ol>
+          </div>
+
+          <div
+            style="
+              background: #f3e5f5;
+              padding: 1.5rem;
+              border-radius: 8px;
+              margin: 1rem 0;
+            "
+          >
+            <h4 style="color: #7b1fa2; margin-bottom: 1rem">
+              ✅ Testing Checklist:
+            </h4>
+            <ul style="color: #424242; line-height: 1.8">
+              <li>✓ Navigation works on all screen sizes</li>
+              <li>✓ Text is readable without zooming</li>
+              <li>✓ Buttons are easily tappable on mobile (≥44px)</li>
+              <li>✓ Images scale properly without distortion</li>
+              <li>✓ No horizontal scrolling</li>
+              <li>✓ Content flows naturally on all devices</li>
+            </ul>
+          </div>
+
+          <div class="code-example">
+            <span class="code-comment"
+              >/* Essential CSS for All Responsive Sites */</span
+            >
+            * {
+            <span class="code-property">box-sizing</span>:
+            <span class="code-value">border-box</span>;
+            <span class="code-comment">/* Include padding in width */</span>
+            }
+
+            <span class="code-property">img</span> {
+            <span class="code-property">max-width</span>:
+            <span class="code-value">100%</span>;
+            <span class="code-comment">/* Responsive images */</span>
+            <span class="code-property">height</span>:
+            <span class="code-value">auto</span>; }
+
+            <span class="code-comment">/* Mobile-first approach */</span>
+            .<span class="code-property">container</span> {
+            <span class="code-property">width</span>:
+            <span class="code-value">100%</span>;
+            <span class="code-property">padding</span>:
+            <span class="code-value">0 1rem</span>; } @<span
+              class="code-property"
+              >media</span
+            >
+            (<span class="code-value">min-width: 768px</span>) { .<span
+              class="code-property"
+              >container</span
+            >
+            { <span class="code-property">max-width</span>:
+            <span class="code-value">1200px</span>;
+            <span class="code-property">margin</span>:
+            <span class="code-value">0 auto</span>; } }
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <h2>📋 7. Summary & Best Practices</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 2rem;
+            "
+          >
+            <div
+              style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 10px;
+              "
+            >
+              <h4 style="margin-bottom: 1rem; font-size: 1.2em">
+                🖼️ Responsive Images
+              </h4>
+              <ul style="line-height: 1.6; font-size: 0.9rem">
+                <li>Use <code>max-width: 100%</code> for most images</li>
+                <li>Use <code>object-fit: cover</code> for fixed containers</li>
+                <li>
+                  Consider <code>background-size: cover</code> for hero sections
+                </li>
+                <li>Always set <code>height: auto</code></li>
+              </ul>
+            </div>
+
+            <div
+              style="
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 10px;
+              "
+            >
+              <h4 style="margin-bottom: 1rem; font-size: 1.2em">
+                💪 CSS Flexbox
+              </h4>
+              <ul style="line-height: 1.6; font-size: 0.9rem">
+                <li>Perfect for navigation bars</li>
+                <li>Great for card layouts and components</li>
+                <li>Use <code>flex-wrap: wrap</code> for responsive grids</li>
+                <li>Remember: one-dimensional layouts only</li>
+              </ul>
+            </div>
+
+            <div
+              style="
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 10px;
+              "
+            >
+              <h4 style="margin-bottom: 1rem; font-size: 1.2em">
+                📱 Mobile-First
+              </h4>
+              <ul style="line-height: 1.6; font-size: 0.9rem">
+                <li>Start with mobile styles first</li>
+                <li>Use <code>min-width</code> media queries</li>
+                <li>Progressive enhancement approach</li>
+                <li>Test on real devices</li>
+              </ul>
+            </div>
+
+            <div
+              style="
+                background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 10px;
+              "
+            >
+              <h4 style="margin-bottom: 1rem; font-size: 1.2em">
+                🛠️ Framework Choice
+              </h4>
+              <ul style="line-height: 1.6; font-size: 0.9rem">
+                <li>Bootstrap: Quick prototyping</li>
+                <li>Tailwind: Custom designs</li>
+                <li>Foundation: Advanced features</li>
+                <li>Custom CSS: Full control</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            style="
+              margin-top: 2rem;
+              background: #fff3cd;
+              border: 1px solid #ffeaa7;
+              padding: 1.5rem;
+              border-radius: 8px;
+            "
+          >
+            <h4 style="color: #856404; margin-bottom: 1rem">
+              ⚠️ Common Mistakes to Avoid:
+            </h4>
+            <ul style="color: #856404; line-height: 1.6">
+              <li>Forgetting the viewport meta tag</li>
+              <li>Using fixed widths without max-width</li>
+              <li>Not testing on actual mobile devices</li>
+              <li>Making touch targets too small (&lt;44px)</li>
+              <li>Ignoring image optimization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer
+      style="
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 3rem;
+      "
+    >
+      <div class="container">
+        <p>🎓 Responsive Web Design Part 2 - Interactive Learning Demo</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8; font-size: 0.9rem">
+          Practice these concepts to master responsive design!
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      let flexItemCount = 3;
+
+      function toggleSection(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector(".toggle-icon");
+
+        if (content.classList.contains("active")) {
+          content.classList.remove("active");
+          header.classList.remove("active");
+        } else {
+          content.classList.add("active");
+          header.classList.add("active");
+        }
+      }
+
+      function updateFlex() {
+        const container = document.getElementById("flexContainer");
+        const direction = document.getElementById("flexDirection").value;
+        const justify = document.getElementById("justifyContent").value;
+        const align = document.getElementById("alignItems").value;
+
+        container.style.flexDirection = direction;
+        container.style.justifyContent = justify;
+        container.style.alignItems = align;
+      }
+
+      function addFlexItem() {
+        const container = document.getElementById("flexContainer");
+        flexItemCount++;
+
+        const newItem = document.createElement("div");
+        newItem.className = "flex-item";
+        newItem.textContent = `Item ${flexItemCount}`;
+        newItem.onclick = function () {
+          if (container.children.length > 1) {
+            container.removeChild(newItem);
+          }
+        };
+
+        container.appendChild(newItem);
+      }
+
+      function toggleNav() {
+        const navMenu = document.getElementById("navMenu");
+        navMenu.classList.toggle("active");
+      }
+
+      function updateSimulator(width) {
+        const frame = document.getElementById("simulatorFrame");
+        const display = document.getElementById("widthDisplay");
+
+        frame.style.width = width + "px";
+        display.textContent = width + "px";
+
+        // Update device label
+        let device = "Custom";
+        if (width <= 480) device = "Mobile";
+        else if (width <= 768) device = "Tablet";
+        else if (width <= 1024) device = "Laptop";
+        else device = "Desktop";
+
+        frame.setAttribute("data-device", device);
+      }
+
+      // Initialize with Flexbox section open
+      document.addEventListener("DOMContentLoaded", function () {
+        // Auto-open the flexbox section for immediate interaction
+        const flexboxSection = document.querySelector(
+          ".section:nth-child(3) .section-content"
+        );
+        const flexboxHeader = document.querySelector(
+          ".section:nth-child(3) .section-header"
+        );
+        if (flexboxSection && flexboxHeader) {
+          flexboxSection.classList.add("active");
+          flexboxHeader.classList.add("active");
+        }
+      });
+
+      // Make flex items clickable to remove them
+      document.addEventListener("DOMContentLoaded", function () {
+        const flexItems = document.querySelectorAll(".flex-item");
+        flexItems.forEach((item) => {
+          item.onclick = function () {
+            const container = document.getElementById("flexContainer");
+            if (container.children.length > 1) {
+              container.removeChild(item);
+            }
+          };
+        });
+      });
+    </script>
+  </body>
+</html>
