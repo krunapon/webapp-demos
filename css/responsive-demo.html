@@ -2,107 +2,136 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Essential viewport meta tag for responsive design - tells browser how to control page dimensions and scaling -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Responsive Web Design - Interactive Demo</title>
     <style>
+      /* =======================
+         GLOBAL RESET & FOUNDATION
+         ======================= */
+      
+      /* Universal box-sizing reset - makes width/height calculations predictable by including padding and border */
       * {
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
+        box-sizing: border-box; /* This is crucial for responsive design - prevents layout breaking */
       }
 
+      /* Base body styles that establish the design foundation */
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background: #f5f5f5;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Modern, web-safe font stack */
+        line-height: 1.6; /* Improves readability by adding vertical spacing between lines */
+        color: #333; /* Dark gray instead of pure black for better readability */
+        background: #f5f5f5; /* Light gray background creates visual separation from white content areas */
       }
 
+      /* Container class implements the "constrained width" responsive pattern */
       .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
+        max-width: 1200px; /* Prevents content from becoming too wide on large screens */
+        margin: 0 auto; /* Centers the container horizontally */
+        padding: 0 20px; /* Provides breathing room on smaller screens */
       }
 
-      /* Header */
+      /* =======================
+         HEADER SECTION
+         ======================= */
+      
+      /* Header uses gradient background and centers content - common pattern for hero sections */
       .header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Diagonal gradient creates visual interest */
         color: white;
         text-align: center;
-        padding: 2rem 0;
+        padding: 2rem 0; /* Vertical padding creates appropriate white space */
       }
 
+      /* Responsive typography - larger on desktop, scales down on mobile */
       .header h1 {
-        font-size: 2.5rem;
+        font-size: 2.5rem; /* Large heading size for impact */
         margin-bottom: 1rem;
       }
 
       .header p {
         font-size: 1.2rem;
-        opacity: 0.9;
+        opacity: 0.9; /* Slightly transparent for visual hierarchy */
       }
 
-      /* Section Styling */
+      /* =======================
+         COLLAPSIBLE SECTIONS SYSTEM
+         ======================= */
+      
+      /* Card-style sections with shadow create depth and organization */
       .section {
         background: white;
         margin: 2rem 0;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
+        border-radius: 10px; /* Rounded corners for modern appearance */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow creates elevation */
+        overflow: hidden; /* Ensures border-radius clips child elements */
       }
 
+      /* Interactive header for each section - combines visual appeal with functionality */
       .section-header {
         background: #3498db;
         color: white;
         padding: 1rem 2rem;
-        cursor: pointer;
+        cursor: pointer; /* Indicates clickable element */
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between; /* Spreads title and icon apart */
         align-items: center;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease; /* Smooth hover effect */
       }
 
+      /* Hover state provides visual feedback */
       .section-header:hover {
-        background: #2980b9;
+        background: #2980b9; /* Darker blue on hover */
       }
 
       .section-header h2 {
         font-size: 1.5rem;
       }
 
+      /* Animated toggle icon enhances user experience */
       .toggle-icon {
         font-size: 1.2rem;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease; /* Smooth rotation animation */
       }
 
+      /* Rotates icon when section is active/open */
       .section-header.active .toggle-icon {
         transform: rotate(180deg);
       }
 
+      /* Content area starts hidden and becomes visible when activated */
       .section-content {
         padding: 2rem;
-        display: none;
+        display: none; /* Hidden by default for collapsible functionality */
       }
 
+      /* Active state shows the content */
       .section-content.active {
         display: block;
       }
 
-      /* 1. Responsive Images Demo */
+      /* =======================
+         RESPONSIVE IMAGES DEMONSTRATION
+         ======================= */
+      
+      /* Grid layout for side-by-side comparison of image techniques */
       .image-comparison {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        gap: 2rem; /* Space between columns */
         margin: 2rem 0;
       }
 
+      /* Each demo container shows different image behavior */
       .image-demo {
         border: 2px solid #ddd;
         border-radius: 8px;
         overflow: hidden;
-        background: #f8f9fa;
+        background: #f8f9fa; /* Light background for contrast */
       }
 
+      /* Header for each demo explains the technique being shown */
       .image-demo h4 {
         background: #e9ecef;
         padding: 1rem;
@@ -111,14 +140,16 @@
         color: #495057;
       }
 
+      /* Container for the demo "image" with fixed height for comparison */
       .image-container {
         padding: 1rem;
-        height: 200px;
+        height: 200px; /* Fixed height shows how different width properties behave */
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
+      /* Simulated image using div with gradient background */
       .demo-image {
         background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
         color: white;
@@ -129,21 +160,23 @@
         border-radius: 4px;
       }
 
+      /* Demonstrates width: 100% behavior - always fills container */
       .width-100 {
-        width: 100%;
+        width: 100%; /* ALWAYS fills parent container, may stretch beyond natural size */
         height: 150px;
       }
 
+      /* Demonstrates max-width: 100% behavior - respects natural size */
       .max-width-100 {
-        max-width: 100%;
-        width: 300px;
+        max-width: 100%; /* Will never exceed parent width OR natural size */
+        width: 300px; /* Natural width when space allows */
         height: 100px;
       }
 
-      /* Object-fit Demo */
+      /* Object-fit demonstration grid - shows how images fit in containers */
       .object-fit-demo {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
         gap: 1rem;
         margin: 2rem 0;
       }
@@ -152,6 +185,7 @@
         text-align: center;
       }
 
+      /* Fixed-size container to demonstrate object-fit behavior */
       .fit-container {
         width: 200px;
         height: 150px;
@@ -161,6 +195,7 @@
         border-radius: 8px;
       }
 
+      /* Simulated image for object-fit demonstration */
       .fit-image {
         width: 100%;
         height: 100%;
@@ -173,38 +208,34 @@
         font-size: 0.9rem;
       }
 
-      .object-fill {
-        object-fit: fill;
-      }
-      .object-contain {
-        object-fit: contain;
-      }
-      .object-cover {
-        object-fit: cover;
-      }
-      .object-none {
-        object-fit: none;
-      }
-      .object-scale-down {
-        object-fit: scale-down;
-      }
+      /* Different object-fit values demonstrate image scaling behavior */
+      .object-fill { object-fit: fill; } /* Stretches to fill, may distort */
+      .object-contain { object-fit: contain; } /* Scales to fit entirely within container */
+      .object-cover { object-fit: cover; } /* Scales to fill container, may crop */
+      .object-none { object-fit: none; } /* No scaling, shows at natural size */
+      .object-scale-down { object-fit: scale-down; } /* Acts like contain or none, whichever is smaller */
 
-      /* 2. Flexbox Demo */
+      /* =======================
+         INTERACTIVE FLEXBOX DEMONSTRATION
+         ======================= */
+      
       .flex-demo {
         margin: 2rem 0;
       }
 
+      /* Live flexbox container that changes based on user controls */
       .flex-container {
         display: flex;
-        background: #e9ecef;
+        background: #e9ecef; /* Light background makes flex behavior visible */
         border-radius: 8px;
         padding: 1rem;
         margin: 1rem 0;
-        min-height: 100px;
-        align-items: center;
-        gap: 1rem;
+        min-height: 100px; /* Ensures container has height for alignment demo */
+        align-items: center; /* Default alignment */
+        gap: 1rem; /* Modern way to add space between flex items */
       }
 
+      /* Individual flex items with distinctive styling */
       .flex-item {
         background: #3498db;
         color: white;
@@ -214,13 +245,15 @@
         font-weight: bold;
       }
 
+      /* Control panel for manipulating flexbox properties in real-time */
       .flex-controls {
         display: flex;
         gap: 1rem;
         margin: 1rem 0;
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Allows controls to wrap on smaller screens */
       }
 
+      /* Each control group contains label and input */
       .control-group {
         display: flex;
         flex-direction: column;
@@ -232,6 +265,7 @@
         color: #495057;
       }
 
+      /* Consistent styling for form controls */
       .control-group select,
       .control-group button {
         padding: 0.5rem;
@@ -241,6 +275,7 @@
         cursor: pointer;
       }
 
+      /* Button styling with hover effect */
       .control-group button {
         background: #28a745;
         color: white;
@@ -252,11 +287,15 @@
         background: #218838;
       }
 
-      /* Responsive Navigation Demo */
+      /* =======================
+         RESPONSIVE NAVIGATION DEMONSTRATION
+         ======================= */
+      
       .nav-demo {
         margin: 2rem 0;
       }
 
+      /* Demo navigation that transforms from horizontal to vertical */
       .demo-navbar {
         background: #2c3e50;
         border-radius: 8px;
@@ -264,6 +303,7 @@
         transition: all 0.3s ease;
       }
 
+      /* Navigation header contains brand and mobile toggle */
       .nav-header {
         display: flex;
         justify-content: space-between;
@@ -277,8 +317,9 @@
         font-weight: bold;
       }
 
+      /* Hamburger menu button - hidden on desktop, visible on mobile */
       .nav-toggle {
-        display: none;
+        display: none; /* Hidden by default - mobile-first approach would show this */
         background: none;
         border: none;
         color: white;
@@ -286,12 +327,14 @@
         cursor: pointer;
       }
 
+      /* Desktop navigation menu - horizontal layout */
       .nav-menu {
         display: flex;
         list-style: none;
         background: #34495e;
       }
 
+      /* Navigation links with hover effects */
       .nav-menu li a {
         display: block;
         color: white;
@@ -304,11 +347,15 @@
         background: #3498db;
       }
 
-      /* Width Simulator */
+      /* =======================
+         WIDTH SIMULATOR FOR TESTING
+         ======================= */
+      
       .width-simulator {
         margin: 2rem 0;
       }
 
+      /* Controls for the width simulator */
       .simulator-controls {
         margin-bottom: 1rem;
         text-align: center;
@@ -319,24 +366,27 @@
         margin: 0 1rem;
       }
 
+      /* Dynamic display of current width */
       .width-display {
         font-weight: bold;
         color: #3498db;
         margin: 0.5rem 0;
       }
 
+      /* Frame that simulates different device widths */
       .simulator-frame {
         border: 3px solid #333;
         border-radius: 10px;
         margin: 0 auto;
-        transition: width 0.3s ease;
+        transition: width 0.3s ease; /* Smooth width changes */
         overflow: hidden;
         background: white;
         position: relative;
       }
 
+      /* Dynamic device label using CSS content */
       .simulator-frame::before {
-        content: attr(data-device);
+        content: attr(data-device); /* Displays the data-device attribute value */
         position: absolute;
         top: -30px;
         left: 50%;
@@ -348,21 +398,23 @@
         font-size: 0.8rem;
       }
 
+      /* Content inside the simulator frame */
       .simulator-content {
         padding: 1rem;
       }
 
+      /* Simulated navigation within the frame */
       .simulator-nav {
         display: flex;
         background: #3498db;
-        margin: -1rem -1rem 1rem -1rem;
+        margin: -1rem -1rem 1rem -1rem; /* Negative margins extend to edges */
       }
 
       .simulator-nav a {
         color: white;
         text-decoration: none;
         padding: 0.75rem 1rem;
-        flex: 1;
+        flex: 1; /* Equal width for all nav items */
         text-align: center;
         font-size: 0.9rem;
         transition: background-color 0.3s ease;
@@ -372,15 +424,16 @@
         background: #2980b9;
       }
 
+      /* Card layout within simulator */
       .simulator-cards {
         display: flex;
         gap: 1rem;
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Allows wrapping on narrow widths */
       }
 
       .simulator-card {
         flex: 1;
-        min-width: 150px;
+        min-width: 150px; /* Minimum width before wrapping */
         background: #f8f9fa;
         padding: 1rem;
         border-radius: 8px;
@@ -393,19 +446,24 @@
         margin-bottom: 0.5rem;
       }
 
-      /* Code Examples */
+      /* =======================
+         CODE EXAMPLE STYLING
+         ======================= */
+      
+      /* Styled code blocks that look like real code editors */
       .code-example {
-        background: #2d3748;
-        color: #e2e8f0;
+        background: #2d3748; /* Dark background like popular code editors */
+        color: #e2e8f0; /* Light text for contrast */
         padding: 1.5rem;
         border-radius: 8px;
         margin: 1rem 0;
-        font-family: "Courier New", monospace;
+        font-family: "Courier New", monospace; /* Monospace font for code */
         font-size: 0.9rem;
-        overflow-x: auto;
+        overflow-x: auto; /* Horizontal scroll for long lines */
         position: relative;
       }
 
+      /* Language label in top-right corner */
       .code-example::before {
         content: "CSS";
         position: absolute;
@@ -418,76 +476,88 @@
         font-size: 0.7rem;
       }
 
-      .code-comment {
-        color: #68d391;
-      }
+      /* Syntax highlighting classes for better code readability */
+      .code-comment { color: #68d391; } /* Green for comments */
+      .code-property { color: #63b3ed; } /* Blue for CSS properties */
+      .code-value { color: #f6e05e; } /* Yellow for values */
 
-      .code-property {
-        color: #63b3ed;
-      }
-
-      .code-value {
-        color: #f6e05e;
-      }
-
-      /* Responsive Styles */
+      /* =======================
+         RESPONSIVE BREAKPOINTS
+         ======================= */
+      
+      /* Tablet and small desktop styles */
       @media (max-width: 768px) {
+        /* Reduce header text size for mobile */
         .header h1 {
           font-size: 2rem;
         }
 
+        /* Stack image comparison vertically on mobile */
         .image-comparison {
           grid-template-columns: 1fr;
         }
 
+        /* Reduce object-fit demo to 2 columns */
         .object-fit-demo {
           grid-template-columns: 1fr 1fr;
         }
 
+        /* Show mobile navigation toggle */
         .nav-toggle {
           display: block;
         }
 
+        /* Hide navigation menu by default on mobile */
         .nav-menu {
           display: none;
-          flex-direction: column;
+          flex-direction: column; /* Stack vertically when shown */
         }
 
+        /* Show navigation when active class is added */
         .nav-menu.active {
           display: flex;
         }
 
+        /* Full-width navigation links on mobile */
         .nav-menu li a {
           padding: 1rem;
-          border-bottom: 1px solid #2c3e50;
+          border-bottom: 1px solid #2c3e50; /* Visual separation */
         }
 
+        /* Stack flex controls vertically on mobile */
         .flex-controls {
           flex-direction: column;
         }
 
+        /* Stack simulator cards vertically */
         .simulator-cards {
           flex-direction: column;
         }
 
+        /* Smaller width slider on mobile */
         .width-slider {
           width: 250px;
         }
       }
 
+      /* Mobile phone styles */
       @media (max-width: 480px) {
+        /* Reduce container padding on very small screens */
         .container {
           padding: 0 10px;
         }
 
+        /* Reduce section padding */
         .section-content {
           padding: 1rem;
         }
 
+        /* Single column for object-fit demo */
         .object-fit-demo {
           grid-template-columns: 1fr;
         }
 
+        /* Responsive fit containers */
         .fit-container {
           width: 100%;
           max-width: 200px;
@@ -496,6 +566,7 @@
     </style>
   </head>
   <body>
+    <!-- Main header section with gradient background -->
     <div class="header">
       <div class="container">
         <h1>📱 Responsive Web Design</h1>
@@ -506,7 +577,7 @@
     </div>
 
     <div class="container">
-      <!-- 1. Responsive Images -->
+      <!-- Section 1: Responsive Images Demonstration -->
       <div class="section">
         <div class="section-header" onclick="toggleSection(this)">
           <h2>🖼️ 1. Responsive Images</h2>
@@ -519,10 +590,12 @@
           </p>
 
           <h3>width vs max-width Comparison</h3>
+          <!-- Side-by-side comparison shows the critical difference between width and max-width -->
           <div class="image-comparison">
             <div class="image-demo">
               <h4>width: 100%</h4>
               <div class="image-container">
+                <!-- This div simulates an image that always fills container -->
                 <div class="demo-image width-100">Stretches to container</div>
               </div>
               <p style="padding: 0 1rem 1rem; color: #666; font-size: 0.9rem">
@@ -532,6 +605,7 @@
             <div class="image-demo">
               <h4>max-width: 100%</h4>
               <div class="image-container">
+                <!-- This div simulates an image that respects both container and natural size -->
                 <div class="demo-image max-width-100">
                   Never larger than original
                 </div>
@@ -542,6 +616,7 @@
             </div>
           </div>
 
+          <!-- Code example with syntax highlighting -->
           <div class="code-example">
             <span class="code-comment"
               >/* Use width: 100% when you want image to fill container */</span
@@ -564,6 +639,7 @@
 
           <h3>Object-fit Property Examples</h3>
           <p>Controls how images fit within their containers:</p>
+          <!-- Grid of object-fit examples shows different scaling behaviors -->
           <div class="object-fit-demo">
             <div class="fit-example">
               <div class="fit-container">
@@ -599,12 +675,13 @@
         </div>
       </div>
 
-      <!-- 2. CSS Flexbox -->
+      <!-- Section 2: Interactive Flexbox Demonstration -->
       <div class="section">
         <div class="section-header" onclick="toggleSection(this)">
           <h2>💪 2. CSS Flexbox</h2>
           <span class="toggle-icon">▼</span>
         </div>
+        <!-- This section starts open by default for immediate interaction -->
         <div class="section-content active">
           <p>
             <strong>Key Point:</strong> Flexbox is perfect for one-dimensional
@@ -613,9 +690,11 @@
 
           <div class="flex-demo">
             <h3>Interactive Flexbox Demo</h3>
+            <!-- Control panel allows real-time manipulation of flexbox properties -->
             <div class="flex-controls">
               <div class="control-group">
                 <label>Flex Direction:</label>
+                <!-- Dropdown changes the main axis direction -->
                 <select id="flexDirection" onchange="updateFlex()">
                   <option value="row">row</option>
                   <option value="column">column</option>
@@ -624,6 +703,7 @@
               </div>
               <div class="control-group">
                 <label>Justify Content:</label>
+                <!-- Controls alignment along main axis -->
                 <select id="justifyContent" onchange="updateFlex()">
                   <option value="flex-start">flex-start</option>
                   <option value="center">center</option>
@@ -634,6 +714,7 @@
               </div>
               <div class="control-group">
                 <label>Align Items:</label>
+                <!-- Controls alignment along cross axis -->
                 <select id="alignItems" onchange="updateFlex()">
                   <option value="stretch">stretch</option>
                   <option value="flex-start">flex-start</option>
@@ -643,10 +724,12 @@
               </div>
               <div class="control-group">
                 <label>Items:</label>
+                <!-- Button to add more flex items for testing -->
                 <button onclick="addFlexItem()">Add Item</button>
               </div>
             </div>
 
+            <!-- Live flexbox container that changes based on user input -->
             <div class="flex-container" id="flexContainer">
               <div class="flex-item">Item 1</div>
               <div class="flex-item">Item 2</div>
@@ -654,6 +737,7 @@
             </div>
           </div>
 
+          <!-- Comprehensive code example showing flexbox properties -->
           <div class="code-example">
             <span class="code-comment">/* Basic Flexbox Setup */</span>
             .<span class="code-property">flex-container</span> {
@@ -682,7 +766,7 @@
         </div>
       </div>
 
-      <!-- 3. Responsive Navigation -->
+      <!-- Section 3: Responsive Navigation Demonstration -->
       <div class="section">
         <div class="section-header" onclick="toggleSection(this)">
           <h2>🧭 3. Responsive Navigation</h2>
@@ -695,11 +779,14 @@
           </p>
 
           <div class="nav-demo">
+            <!-- Demo navigation that transforms based on screen size -->
             <div class="demo-navbar">
               <div class="nav-header">
                 <div class="nav-brand">My Website</div>
+                <!-- Hamburger menu button - only visible on mobile -->
                 <button class="nav-toggle" onclick="toggleNav()">☰</button>
               </div>
+              <!-- Navigation menu that changes layout responsively -->
               <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -713,6 +800,7 @@
             </p>
           </div>
 
+          <!-- Code showing responsive navigation implementation -->
           <div class="code-example">
             <span class="code-comment">/* Desktop Navigation */</span>
             .<span class="code-property">nav-menu</span> {
@@ -741,7 +829,7 @@
         </div>
       </div>
 
-      <!-- 4. Width Simulator -->
+      <!-- Section 4: Width Simulator for Testing Responsiveness -->
       <div class="section">
         <div class="section-header" onclick="toggleSection(this)">
           <h2>📏 4. Responsive Width Simulator</h2>
@@ -756,6 +844,7 @@
           <div class="width-simulator">
             <div class="simulator-controls">
               <label for="widthSlider">Screen Width:</label>
+              <!-- Slider allows dynamic width adjustment -->
               <input
                 type="range"
                 id="widthSlider"
@@ -765,9 +854,11 @@
                 value="800"
                 oninput="updateSimulator(this.value)"
               />
+              <!-- Dynamic display of current width -->
               <div class="width-display" id="widthDisplay">800px</div>
             </div>
 
+            <!-- Simulated device frame that changes width -->
             <div
               class="simulator-frame"
               id="simulatorFrame"
@@ -775,19 +866,15 @@
               data-device="Tablet"
             >
               <div class="simulator-content">
+                <!-- Simulated navigation within the frame -->
                 <div class="simulator-nav">
                   <a href="#">Home</a>
                   <a href="#">About</a>
                   <a href="#">Services</a>
                   <a href="#">Contact</a>
                 </div>
+                <!-- Flexible card layout that responds to width changes -->
                 <div class="simulator-cards">
-                  <div class="simulator-card">
-                    <h4>Feature 1</h4>
-                    <p>
-                      Responsive design adapts to any screen size automatically.
-                    </p>
-                  </div>
                   <div class="simulator-card">
                     <h4>Feature 2</h4>
                     <p>Flexbox makes layouts flexible and easy to maintain.</p>
@@ -801,6 +888,7 @@
             </div>
           </div>
 
+          <!-- Code showing common responsive breakpoints -->
           <div class="code-example">
             <span class="code-comment">/* Common Breakpoints */</span>
             <span class="code-comment">/* Mobile */</span>
@@ -823,7 +911,7 @@
         </div>
       </div>
 
-      <!-- 5. Framework Alternatives -->
+      <!-- Section 5: Framework Comparison -->
       <div class="section">
         <div class="section-header" onclick="toggleSection(this)">
           <h2>🛠️ 5. Framework Alternatives</h2>
@@ -835,6 +923,7 @@
             may add complexity or file size.
           </p>
 
+          <!-- Grid layout comparing different CSS frameworks -->
           <div
             style="
               display: grid;
@@ -843,6 +932,7 @@
               margin: 2rem 0;
             "
           >
+            <!-- Bootstrap framework card -->
             <div
               style="
                 background: #f8f9fa;
@@ -855,6 +945,7 @@
               <p style="font-size: 0.9rem; margin-bottom: 1rem">
                 Component-based framework
               </p>
+              <!-- Pros and cons list for educational comparison -->
               <ul style="font-size: 0.85rem; color: #666">
                 <li>✅ Quick development</li>
                 <li>✅ Large community</li>
@@ -863,6 +954,7 @@
               </ul>
             </div>
 
+            <!-- Tailwind CSS framework card -->
             <div
               style="
                 background: #f8f9fa;
@@ -883,6 +975,7 @@
               </ul>
             </div>
 
+            <!-- Foundation framework card -->
             <div
               style="
                 background: #f8f9fa;
@@ -903,6 +996,7 @@
               </ul>
             </div>
 
+            <!-- Custom CSS approach card -->
             <div
               style="
                 background: #f8f9fa;
@@ -926,7 +1020,7 @@
         </div>
       </div>
 
-      <!-- Testing Tools -->
+      <!-- Section 6: Testing Guidelines and Tools -->
       <div class="section">
         <div class="section-header" onclick="toggleSection(this)">
           <h2>🧪 6. Testing Your Responsive Design</h2>
@@ -938,6 +1032,7 @@
             screen sizes.
           </p>
 
+          <!-- Chrome DevTools instructions -->
           <div
             style="
               background: #e3f2fd;
@@ -949,6 +1044,7 @@
             <h4 style="color: #1976d2; margin-bottom: 1rem">
               🔧 Chrome DevTools Method:
             </h4>
+            <!-- Step-by-step instructions for using browser dev tools -->
             <ol style="color: #424242; line-height: 1.8">
               <li>Press <strong>F12</strong> to open DevTools</li>
               <li>
@@ -962,6 +1058,7 @@
             </ol>
           </div>
 
+          <!-- Testing checklist for students -->
           <div
             style="
               background: #f3e5f5;
@@ -973,6 +1070,7 @@
             <h4 style="color: #7b1fa2; margin-bottom: 1rem">
               ✅ Testing Checklist:
             </h4>
+            <!-- Comprehensive checklist ensures thorough testing -->
             <ul style="color: #424242; line-height: 1.8">
               <li>✓ Navigation works on all screen sizes</li>
               <li>✓ Text is readable without zooming</li>
@@ -983,6 +1081,7 @@
             </ul>
           </div>
 
+          <!-- Essential CSS foundation code -->
           <div class="code-example">
             <span class="code-comment"
               >/* Essential CSS for All Responsive Sites */</span
@@ -1021,13 +1120,14 @@
         </div>
       </div>
 
-      <!-- Summary -->
+      <!-- Section 7: Summary and Best Practices -->
       <div class="section">
         <div class="section-header" onclick="toggleSection(this)">
           <h2>📋 7. Summary & Best Practices</h2>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="section-content">
+          <!-- Grid layout for organized summary cards -->
           <div
             style="
               display: grid;
@@ -1035,6 +1135,7 @@
               gap: 2rem;
             "
           >
+            <!-- Responsive Images summary card -->
             <div
               style="
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1046,6 +1147,7 @@
               <h4 style="margin-bottom: 1rem; font-size: 1.2em">
                 🖼️ Responsive Images
               </h4>
+              <!-- Key takeaways for images -->
               <ul style="line-height: 1.6; font-size: 0.9rem">
                 <li>Use <code>max-width: 100%</code> for most images</li>
                 <li>Use <code>object-fit: cover</code> for fixed containers</li>
@@ -1056,6 +1158,7 @@
               </ul>
             </div>
 
+            <!-- CSS Flexbox summary card -->
             <div
               style="
                 background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -1067,6 +1170,7 @@
               <h4 style="margin-bottom: 1rem; font-size: 1.2em">
                 💪 CSS Flexbox
               </h4>
+              <!-- Key takeaways for flexbox -->
               <ul style="line-height: 1.6; font-size: 0.9rem">
                 <li>Perfect for navigation bars</li>
                 <li>Great for card layouts and components</li>
@@ -1075,6 +1179,7 @@
               </ul>
             </div>
 
+            <!-- Mobile-First approach summary card -->
             <div
               style="
                 background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -1086,6 +1191,7 @@
               <h4 style="margin-bottom: 1rem; font-size: 1.2em">
                 📱 Mobile-First
               </h4>
+              <!-- Key takeaways for mobile-first design -->
               <ul style="line-height: 1.6; font-size: 0.9rem">
                 <li>Start with mobile styles first</li>
                 <li>Use <code>min-width</code> media queries</li>
@@ -1094,6 +1200,7 @@
               </ul>
             </div>
 
+            <!-- Framework selection summary card -->
             <div
               style="
                 background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
@@ -1105,6 +1212,7 @@
               <h4 style="margin-bottom: 1rem; font-size: 1.2em">
                 🛠️ Framework Choice
               </h4>
+              <!-- Quick framework selection guide -->
               <ul style="line-height: 1.6; font-size: 0.9rem">
                 <li>Bootstrap: Quick prototyping</li>
                 <li>Tailwind: Custom designs</li>
@@ -1114,6 +1222,7 @@
             </div>
           </div>
 
+          <!-- Warning section highlighting common mistakes -->
           <div
             style="
               margin-top: 2rem;
@@ -1126,6 +1235,7 @@
             <h4 style="color: #856404; margin-bottom: 1rem">
               ⚠️ Common Mistakes to Avoid:
             </h4>
+            <!-- List of frequent student mistakes -->
             <ul style="color: #856404; line-height: 1.6">
               <li>Forgetting the viewport meta tag</li>
               <li>Using fixed widths without max-width</li>
@@ -1138,6 +1248,7 @@
       </div>
     </div>
 
+    <!-- Footer section -->
     <footer
       style="
         background: #2c3e50;
@@ -1156,40 +1267,65 @@
     </footer>
 
     <script>
+      /* =======================
+         JAVASCRIPT FUNCTIONALITY
+         ======================= */
+      
+      // Counter for dynamically added flex items
       let flexItemCount = 3;
 
+      /**
+       * Toggles the visibility of collapsible sections
+       * @param {Element} header - The clicked section header
+       */
       function toggleSection(header) {
-        const content = header.nextElementSibling;
-        const icon = header.querySelector(".toggle-icon");
+        const content = header.nextElementSibling; // Get the content div
+        const icon = header.querySelector(".toggle-icon"); // Get the toggle arrow
 
+        // Toggle the active state for both content and header
         if (content.classList.contains("active")) {
-          content.classList.remove("active");
-          header.classList.remove("active");
+          content.classList.remove("active"); // Hide content
+          header.classList.remove("active"); // Reset header state
         } else {
-          content.classList.add("active");
-          header.classList.add("active");
+          content.classList.add("active"); // Show content
+          header.classList.add("active"); // Activate header (rotates arrow)
         }
       }
 
+      /**
+       * Updates the flexbox demonstration container based on user selections
+       * Reads values from dropdowns and applies them to the flex container
+       */
       function updateFlex() {
         const container = document.getElementById("flexContainer");
+        
+        // Get current values from form controls
         const direction = document.getElementById("flexDirection").value;
         const justify = document.getElementById("justifyContent").value;
         const align = document.getElementById("alignItems").value;
 
+        // Apply the selected properties to the container
         container.style.flexDirection = direction;
         container.style.justifyContent = justify;
         container.style.alignItems = align;
       }
 
+      /**
+       * Adds a new flex item to the demonstration
+       * Each new item can be clicked to remove it (if more than 1 item exists)
+       */
       function addFlexItem() {
         const container = document.getElementById("flexContainer");
-        flexItemCount++;
+        flexItemCount++; // Increment counter for unique naming
 
+        // Create new flex item element
         const newItem = document.createElement("div");
         newItem.className = "flex-item";
         newItem.textContent = `Item ${flexItemCount}`;
+        
+        // Add click handler to remove item (educational: shows flex behavior changes)
         newItem.onclick = function () {
+          // Prevent removing all items (keep at least 1 for demonstration)
           if (container.children.length > 1) {
             container.removeChild(newItem);
           }
@@ -1198,49 +1334,63 @@
         container.appendChild(newItem);
       }
 
+      /**
+       * Toggles the mobile navigation menu visibility
+       * Demonstrates responsive navigation behavior
+       */
       function toggleNav() {
         const navMenu = document.getElementById("navMenu");
-        navMenu.classList.toggle("active");
+        navMenu.classList.toggle("active"); // Show/hide mobile menu
       }
 
+      /**
+       * Updates the width simulator to show responsive behavior at different screen sizes
+       * @param {string} width - The selected width value from the slider
+       */
       function updateSimulator(width) {
         const frame = document.getElementById("simulatorFrame");
         const display = document.getElementById("widthDisplay");
 
+        // Apply the new width to the simulator frame
         frame.style.width = width + "px";
-        display.textContent = width + "px";
+        display.textContent = width + "px"; // Update width display
 
-        // Update device label
+        // Determine and display appropriate device category
         let device = "Custom";
         if (width <= 480) device = "Mobile";
         else if (width <= 768) device = "Tablet";
         else if (width <= 1024) device = "Laptop";
         else device = "Desktop";
 
+        // Update the device label (shown via CSS ::before pseudo-element)
         frame.setAttribute("data-device", device);
       }
 
-      // Initialize with Flexbox section open
+      /**
+       * Initialize the page when DOM is fully loaded
+       */
       document.addEventListener("DOMContentLoaded", function () {
-        // Auto-open the flexbox section for immediate interaction
+        // Auto-open the flexbox section for immediate student interaction
+        // This draws attention to the most interactive demonstration
         const flexboxSection = document.querySelector(
-          ".section:nth-child(3) .section-content"
+          ".section:nth-child(3) .section-content" // 3rd section (Flexbox)
         );
         const flexboxHeader = document.querySelector(
           ".section:nth-child(3) .section-header"
         );
+        
+        // Activate the flexbox section if elements exist
         if (flexboxSection && flexboxHeader) {
           flexboxSection.classList.add("active");
           flexboxHeader.classList.add("active");
         }
-      });
 
-      // Make flex items clickable to remove them
-      document.addEventListener("DOMContentLoaded", function () {
+        // Make existing flex items clickable for removal (educational interaction)
         const flexItems = document.querySelectorAll(".flex-item");
         flexItems.forEach((item) => {
           item.onclick = function () {
             const container = document.getElementById("flexContainer");
+            // Only allow removal if more than 1 item exists
             if (container.children.length > 1) {
               container.removeChild(item);
             }
@@ -1249,4 +1399,10 @@
       });
     </script>
   </body>
-</html>
+</html>Feature 1</h4>
+                    <p>
+                      Responsive design adapts to any screen size automatically.
+                    </p>
+                  </div>
+                  <div class="simulator-card">
+                    <h4>
