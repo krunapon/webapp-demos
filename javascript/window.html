@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>The window object</title>
+  </head>
+  <body>
+    <h1>I'm all about that window...</h1>
+
+    <div id="info"></div>
+
+    <script>
+      const infoDiv = document.getElementById("info");
+
+      // Using arrow functions for cleaner syntax
+      const logWindowInfo = () => {
+        console.log(window);
+        console.log(window.location);
+      };
+
+      const updatePageInfo = () => {
+        const { location, navigator, outerWidth, outerHeight } = window;
+
+        infoDiv.innerHTML +=
+          "The URL of this page is " + location.href + "<br/>";
+        infoDiv.innerHTML +=
+          "The user agent is " + navigator.userAgent + "<br/>";
+        infoDiv.innerHTML +=
+          "The web page width and height is " +
+          outerWidth +
+          " by " +
+          outerHeight;
+      };
+
+      // Execute the functions
+      logWindowInfo();
+      updatePageInfo();
+    </script>
+  </body>
+</html>

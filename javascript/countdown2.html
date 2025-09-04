@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Animating DOM with setInterval</title>
+  </head>
+
+  <body>
+    <div>
+      <img
+        id="ohnoes"
+        src="https://www.kasandbox.org/programming-images/creatures/OhNoes.png"
+      />
+      <h1>
+        Oh noes, the world will end in
+        <span id="countdown">5</span>
+        seconds!
+      </h1>
+    </div>
+
+    <script>
+      // Step 1. What element do we want to animate?
+      let countdown = document.getElementById("countdown");
+      let intervalId = null; // Store the interval ID
+
+      // Step 2. What function will change it each time?
+      let countItDown = () => {
+        let currentTime = parseFloat(countdown.textContent);
+        if (currentTime > 0) {
+          countdown.textContent = currentTime - 1;
+        }
+        console.log("Is running?", isCountdownRunning()); // true initially
+      };
+      // Step 3: Call that on an interval
+      intervalId = window.setInterval(countItDown, 1000);
+
+      // Now you can check if the interval is still running:
+      function isCountdownRunning() {
+        return intervalId !== null;
+      }
+    </script>
+  </body>
+</html>
