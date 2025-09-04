@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        animation-name: example;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+      }
+      /* Standard syntax */
+      @keyframes example {
+        0% {
+          background-color: red;
+        }
+        25% {
+          background-color: yellow;
+        }
+        50% {
+          background-color: blue;
+        }
+        100% {
+          background-color: green;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Animation Example</h1>
+    <p>This example changes the background color of a div element.</p>
+    <div></div>
+  </body>
+</html>

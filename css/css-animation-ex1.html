@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSS Animation Example</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        animation-name: example;
+        animation-duration: 4s;
+        margin: 20px 0; /* Consistent top/bottom margins */
+        animation-iteration-count: infinite; /* Repeat the animation infinitely */
+      }
+      @keyframes example {
+        from {
+          background-color: red;
+        }
+        to {
+          background-color: yellow;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>CSS Animation</h1>
+    <p>This example changes the color of a div element:</p>
+    <p>
+      <b>Note:</b> When an animation is finished, it changes back to its
+      original style.
+    </p>
+
+    <div></div>
+  </body>
+</html>
