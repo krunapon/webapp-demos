@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Challenge: Classification</title>
+    <style>
+      .right-answer {
+        background: rgb(0, 255, 9);
+      }
+
+      .wrong-answer {
+        background: rgb(237, 28, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Pop Quiz: Animal Classification</h2>
+
+    <p>Which animal class do humans belong to?</p>
+    <ul id="answers">
+      <li>Mammalia</li>
+      <li>Ascidiacea</li>
+      <li>Rep tilia</li>
+    </ul>
+
+    <script>
+      let answers = document.querySelectorAll("#answers li");
+      let rightAnswer = answers[0];
+      let wrongAnswer1 = answers[1];
+      let wrongAnswer2 = answers[2];
+      rightAnswer.addEventListener("click", () =>
+        rightAnswer.classList.add("right-answer")
+      );
+      wrongAnswer1.addEventListener("click", () =>
+        wrongAnswer1.classList.add("wrong-answer")
+      );
+      wrongAnswer2.addEventListener("click", () =>
+        wrongAnswer2.classList.add("wrong-answer")
+      );
+    </script>
+  </body>
+</html>
