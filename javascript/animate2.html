@@ -20,7 +20,9 @@
         element.style.left = position + "px";
         // Continue until element reaches edge
         if (position < window.innerWidth - 50) {
-          requestAnimationFrame(moveBox);
+          requestID = requestAnimationFrame(moveBox);
+        } else {
+          cancelAnimationFrame(requestID);
         }
       }
       moveBox();
