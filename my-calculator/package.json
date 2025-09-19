@@ -1,0 +1,18 @@
+{
+  "name": "my-calculator",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "this is a module for operators add or subtract",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "add": "node src/add.js",
+    "subtract": "node src/subtract.js"
+  },
+  "author": "Manee Jaidee 5829",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^12.9.6"
+  }
+}

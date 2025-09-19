@@ -1,17 +1,24 @@
-import inquirer from 'inquirer'
+import inquirer from "inquirer";
+const add = (n1, n2) => parseFloat(n1) + parseFloat(n2);
 
-function add(n1, n2) {
-    let result = parseFloat(n1) + parseFloat(n2)
-    return result;
-}
-  
 var questions = [
-    {	
-      type: 'input',
-      name: 'operands',
-      message:'Operands:'
-    }
-]
+  {
+    type: "input",
+    name: "operands",
+    message: "Operands:",
+  },
+];
+
+inquirer.prompt(questions).then((answers) => {
+  const sum = answers["operands"]
+    .split(" ")
+    .map((num) => parseFloat(num))
+    .reduce((total, x) => total + x, 0);
+  console.log(`operands are ${answers["operands"]}`);
+  console.log(
+    `${answers["operands"].split(" ").join(" + ")} = ${sum.toFixed(2)}`
+  );
+});
 
 /*inquirer.prompt(questions).then(answers => {
     const operands =  answers['operands'];
@@ -21,9 +28,3 @@ var questions = [
     let n2 = args[1];
     console.log(n1 + " + " + n2 + " = " + add(n1,n2))
 })*/
-
-inquirer.prompt(questions).then(answers => {
-  const sum = answers['operands'].split(" ").map(num => parseFloat(num)).reduce((total, x) => total + x, 0)
-  console.log(`operands are ${answers['operands']}`);
-  console.log(`${answers['operands'].split(' ').join(' + ')} = ${sum.toFixed(2)}`);
-}); 
