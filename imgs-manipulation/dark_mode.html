@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: "Sarabun", sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        color: #333;
+      }
+      h2 {
+        margin-bottom: 10px;
+      }
+      p {
+        margin-bottom: 20px;
+        color: #666;
+        max-width: 600px;
+        text-align: center;
+      }
+
+      .container {
+        display: flex;
+        gap: 20px;
+      }
+
+      .phone-mockup {
+        width: 250px;
+        height: 450px;
+        border-radius: 20px;
+        border: 8px solid #333;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* หน้าจอซ้าย: สีดำสนิท (Bad UX) */
+      .screen-black {
+        background-color: #000000;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      /* หน้าจอขวา: สีเทาเข้ม (Good UX) */
+      .screen-grey {
+        background-color: #121212;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .card {
+        width: 180px;
+        height: 100px;
+        background-color: #333;
+        border-radius: 8px;
+        position: absolute;
+        top: 20%;
+        left: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+        /* Animation การเคลื่อนที่ */
+        animation: scrollMove 3s infinite ease-in-out;
+      }
+
+      /* สร้างเงาสีม่วงจำลอง (Fake Smear) เฉพาะในจอสีดำ */
+      .screen-black .card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #333;
+        border-radius: 8px;
+        z-index: -1;
+        opacity: 0.7;
+
+        /* Keyframe จำลองเงายืด */
+        animation: smearEffect 3s infinite ease-in-out;
+      }
+
+      .label {
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      @keyframes scrollMove {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(200px);
+        }
+      }
+
+      /* Animation จำลองเงายืดสีม่วง */
+      @keyframes smearEffect {
+        0%,
+        100% {
+          transform: translateY(0) scaleY(1);
+          box-shadow: none;
+        }
+        25% {
+          /* ช่วงขาลง: ยืดขึ้นด้านบน */
+          transform: translateY(-15px) scaleY(1.2);
+          box-shadow: 0 -10px 10px rgba(100, 0, 150, 0.8); /* เงาสีม่วง */
+          filter: blur(4px);
+        }
+        50% {
+          transform: translateY(0) scaleY(1);
+          box-shadow: none;
+          filter: none;
+        }
+        75% {
+          /* ช่วงขาขึ้น: ยืดลงด้านล่าง */
+          transform: translateY(15px) scaleY(1.2);
+          box-shadow: 0 10px 10px rgba(100, 0, 150, 0.8); /* เงาสีม่วง */
+          filter: blur(4px);
+        }
+      }
+
+      .status-bar {
+        width: 100%;
+        height: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        position: absolute;
+        top: 0;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>OLED Smearing Simulator</h2>
+    <p>
+      ภาพจำลองอาการ "จอย้วย" บนมือถือ OLED<br />สังเกตที่จอซ้าย (พื้นหลังดำ)
+      จะเห็นเงาสีม่วงๆ วิ่งตามวัตถุ
+    </p>
+
+    <div class="container">
+      <!-- กรณีที่ 1: สีดำสนิท -->
+      <div style="text-align: center">
+        <div class="phone-mockup">
+          <div class="screen-black">
+            <div class="status-bar"></div>
+            <div class="card">Pure Black<br />#000000</div>
+          </div>
+        </div>
+        <div class="label" style="color: #d32f2f">❌ Smearing (ย้วย/แลค)</div>
+      </div>
+
+      <!-- กรณีที่ 2: สีเทาเข้ม -->
+      <div style="text-align: center">
+        <div class="phone-mockup">
+          <div class="screen-grey">
+            <div class="status-bar"></div>
+            <div
+              class="card"
+              style="animation: scrollMove 3s infinite ease-in-out"
+            >
+              <!-- ใส่ Animation ปกติ ไม่มี Smear -->
+              Dark Grey<br />#121212
+            </div>
+          </div>
+        </div>
+        <div class="label" style="color: #388e3c">✅ Smooth (ลื่นไหล)</div>
+      </div>
+    </div>
+  </body>
+</html>
