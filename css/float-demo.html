@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS Float Property Demonstration</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        color: #222;
+      }
+
+      /* Narrow container so the wrapping channel is small and the effect is obvious. */
+      .demo {
+        max-width: 640px;
+        border: 2px solid #333;
+        padding: 15px;
+        /* Modern Clearfix: forces this container to fully contain its floated children */
+        display: flow-root;
+      }
+
+      .box {
+        width: 110px;
+        height: 110px;
+        background: #1f9bd1;
+        color: #fff;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .float-left {
+        float: left;
+        margin: 0 15px 15px 0;
+      }
+      .float-right {
+        float: right;
+        margin: 0 0 15px 15px;
+      }
+
+      /* Remove the paragraph's top margin so its first line starts level with the
+             boxes — makes the wrapping beside the boxes immediately visible. */
+      .demo p {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>CSS Float Property Demonstration</h2>
+
+    <div class="demo">
+      <!-- The floated boxes MUST appear BEFORE the paragraph in the source order,
+         otherwise the following text cannot wrap around them. -->
+      <div class="box float-left">Float Left</div>
+      <div class="box float-right">Float Right</div>
+
+      <p>
+        This is some text to demonstrate how floated elements interact with
+        other content. Notice how each line is shortened to fit the narrow
+        channel that remains between the two floated boxes: the left box sits
+        against the left edge, the right box against the right edge, and the
+        text flows down the middle. The lines stay narrow line after line until
+        the text passes the bottom of the taller floated box. After that point
+        the lines reclaim the full width of the container and resume their
+        normal flow below the floats, exactly as they would if no floats were
+        present at all.
+      </p>
+    </div>
+
+    <h3>Explanation</h3>
+    <p>This example demonstrates the CSS <code>float</code> property:</p>
+    <ul>
+      <li>The left blue box has <code>float: left;</code></li>
+      <li>The right blue box has <code>float: right;</code></li>
+    </ul>
+    <p>Notice how:</p>
+    <ul>
+      <li>
+        The two boxes are pulled out of the block flow and pinned to the left
+        and right edges of the container.
+      </li>
+      <li>
+        The paragraph stays in normal flow, and its lines wrap into the channel
+        between the boxes.
+      </li>
+      <li>
+        Once the text clears the bottom of the boxes, it returns to full width.
+      </li>
+      <li>
+        The container has <code>display: flow-root;</code> (a modern clearfix)
+        so it grows to contain the floated boxes instead of collapsing.
+      </li>
+    </ul>
+  </body>
+</html>

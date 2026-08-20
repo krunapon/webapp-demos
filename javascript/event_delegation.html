@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <body>
+    <ul id="list">
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Cherry</li>
+    </ul>
+    <p id="output"></p>
+    <script>
+      const list = document.querySelector("#list");
+      const output = document.querySelector("#output");
+      list.addEventListener("click", (e) => {
+        if (e.target.matches("li")) {
+          output.textContent = `You clicked: ${e.target.textContent}`;
+        }
+      });
+    </script>
+  </body>
+</html>

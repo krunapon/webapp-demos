@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Challenge: Style guide</title>
+  </head>
+  <body>
+    <h1>Style guide</h1>
+
+    <p>
+      The hottest color to wear right now is:
+      <span id="trendy-color">?</span>
+    </p>
+
+    <p>
+      This is the trendy way to sign an autograph:
+      <span id="trendy-handwriting">?</span>
+    </p>
+
+    <p>
+      This is the trendy way to frame photographs:
+      <br />
+      <img
+        id="trendy-frame"
+        src="https://www.kasandbox.org/programming-images/avatars/mr-pink.png"
+        alt="Cool avatar"
+      />
+    </p>
+
+    <script>
+      let colorEl = document.getElementById("trendy-color");
+      colorEl.innerHTML = "Blue";
+      colorEl.style.color = "blue";
+      let handEl = document.getElementById("trendy-handwriting");
+      handEl.innerHTML = "Itim";
+      handEl.style.fontFamily = "serif";
+      let frameEl = document.getElementById("trendy-frame");
+      frameEl.style.border = "2px solid red";
+    </script>
+  </body>
+</html>

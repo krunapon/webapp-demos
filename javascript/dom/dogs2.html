@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Finding elements by CSS selector</title>
+    <style>
+      p .animal {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="heading">All about dogs</h1>
+
+    <p>
+      The domestic <span class="animal">dog</span> is known as man's best
+      friend. The <span class="animal">dog</span> was the first domesticated
+      animal and has been widely kept as a working, hunting, and pet companion.
+      According to recent coarse estimates, there are currently between 700
+      million and one billion <span class="animal">dog</span>s, making them the
+      most abundant predators in the world.
+      <a href="http://en.wikipedia.org/wiki/Dog">Read more on Wikipedia</a>.
+    </p>
+
+    <img
+      src="https://www.kasandbox.org/programming-images/animals/dog_sleeping-puppy.png"
+      height="150"
+    />
+
+    <img
+      src="https://www.kasandbox.org/programming-images/animals/dogs_collies.png"
+      height="150"
+    />
+
+    <script>
+      const headingEl = document.getElementById("heading");
+      console.log(headingEl);
+      headingEl.textContent = "All about dogs (ทุกเรื่องเกี่ยวกับหมา)";
+      // get elements by class name
+      const nameEls = document.getElementsByClassName("animal");
+      console.log(nameEls);
+      // go through each element with the index loop
+      for (let i = 0; i < nameEls.length; i++) {
+        nameEls[i].textContent = "dog (หมา)";
+      }
+      console.log(nameEls[0]);
+    </script>
+  </body>
+</html>
