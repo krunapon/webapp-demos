@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>animate2</title>
+    <style>
+      #box {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script>
+      let position = 0;
+      const element = document.getElementById("box");
+      const moveBox = () => {
+        position += 2; // Move 2 pixels per frame
+        element.style.transform = `translateX(${position}px)`;
+        // Continue until element reaches edge
+        if (position < window.innerWidth - 50) {
+          requestID = requestAnimationFrame(moveBox);
+        }
+      };
+      moveBox();
+    </script>
+  </body>
+</html>
