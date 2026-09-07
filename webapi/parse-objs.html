@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fetching and Parsing JSON</title>
+  </head>
+  <body>
+    <h2>Fetching and Parsing JSON</h2>
+    <pre id="demo"></pre>
+    <script>
+      async function parseFile() {
+        try {
+          const response = await fetch("files/simple2.json");
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const responseData = await response.json();
+          const people = responseData.people;
+          const lines = people.map(
+            (person) => `${person.name}\n${person.street}\n${person.phone}`,
+          );
+          document.querySelector("#demo").textContent = lines.join("\n\n");
+        } catch (err) {
+          document.querySelector("#demo").textContent = `Error: ${err.message}`;
+        }
+      }
+      parseFile();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "people": [
+    {
+      "name": "Manee Deejai",
+      "street": "123 Mittrapap Rd.",
+      "phone": "043 009700"
+    },
+    {
+      "name": "Manee Jaidee",
+      "street": "456 Maliwan Rd.",
+      "phone": "043 123567"
+    }
+  ]
+}
